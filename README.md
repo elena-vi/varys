@@ -17,6 +17,7 @@ A search engine
     - Ranking 
   - Friday:
     - Crawling and processing 
+    - Retro at 5
   - Weekend?
     - **What weekend?!**
     - Web interface
@@ -25,8 +26,8 @@ A search engine
   - Monday:
   - Tuesday:
   - Wednesday:
-  - Thursday:
     - PM ***Feature freeze***
+  - Thursday:
   - Friday:
     - Presentation + Graduation
   - Weekend?
