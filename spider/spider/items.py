@@ -8,6 +8,6 @@
 import scrapy
 
 
-class SpiderItem(scrapy.Item):
+class VarysItem(scrapy.Item):
   link = Field()
   # pass

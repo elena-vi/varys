@@ -1,10 +1,10 @@
+import scrapy
+from scrapy.crawler import CrawlerProcess
 from scrapy.spider import BaseSpider
 from scrapy.selector import HtmlXPathSelector
-# from craigslist_sample.items import CraigslistSampleItem
 
-
-class MySpider(BaseSpider):
-  name = "twitter"
+class Varys(BaseSpider):
+  name = "spider"
   start_urls = ["https://twitter.com/"]
 
   def parse(self, response):
@@ -18,3 +18,6 @@ class MySpider(BaseSpider):
     print "\n -------- START LINKS --------"
     print collected_links
     print "\n --------- END LINKS ---------"
+# process = CrawlerProcess()
+# process.crawl(twitter)
+# process.start() 
