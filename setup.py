@@ -8,5 +8,8 @@ setup(
     license='',
     author='Elena, Alex, Joe, Oliver',
     author_email='',
-    description='A search engine'
+    description='A search engine',
+    install_requires=[
+    		'Scrapy==1.1.1'
+    ],
 )
