@@ -1,12 +1,12 @@
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.selector import HtmlXPathSelector
-from craigslist_sample.items import CraigslistSampleItem
+from varys.items import VarysItem
 
 
-class MySpider(CrawlSpider):
-    name = "craigs"
-    start_urls = ["https://bbc.co.uk/"]
+class CrawlSpider(CrawlSpider):
+    name = "varys"
+    start_urls = ["http://makersacademy.com"]
 
     rules = (
         Rule(SgmlLinkExtractor(allow=(), restrict_xpaths=('//a',)), callback="parse_items", follow= True),
@@ -14,7 +14,7 @@ class MySpider(CrawlSpider):
 
     def parse_items(self, response):
         hxs = HtmlXPathSelector(response)
-        item = CraigslistSampleItem()
+        item = VarysItem()
         item["link"] = response.url
-        item["title"] = response.xpath("//title").extract()
+        item["title"] = response.xpath("//title/text()").extract()
         return(item)
