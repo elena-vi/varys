@@ -13,4 +13,11 @@ feature 'Home page' do
   it 'has a search button' do
     expect(page).to have_selector("input[type='submit'][value='search']")
   end
+
+  it 'takes you to results page when you click search' do
+    fill_in :search_query, with: 'news'
+    click_button :search
+    expect(current_path).to eq('/results')
+    expect(page).to have_content('news')
+  end
 end
