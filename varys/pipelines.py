@@ -5,6 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 import rethinkdb as r
+import database
 
 
 class VarysPipeline(object):
@@ -13,5 +14,6 @@ class VarysPipeline(object):
 		r.connect('localhost', 28015).repl()
 
 	def process_item(self, item, spider):
+		hey(item["link"])
 		r.db('items').table('links').insert({ 'url': item["link"], 'title': item["title"]}).run()
 		return item
