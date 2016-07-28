@@ -1,1 +1,10 @@
-<%=@query%>
+<%=@query %>
+<% @results.each do |result| %>
+  <p>
+    <%= result.title %>
+    <br>
+    <%= result.description %>
+    <br>
+    <%= result.url %>
+  </p>
+<% end %>

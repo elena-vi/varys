@@ -5,14 +5,30 @@ ENV['RACK_ENV'] = 'test'
 require 'capybara'
 require 'capybara/rspec'
 require 'rspec'
+require 'factory_girl'
+# require 'nobrainer_helper'
 
 require File.join(File.dirname(__FILE__), '..', 'app/app.rb')
 
 Capybara.app = Varys
 
 RSpec.configure do |config|
-  config.alias_example_group_to :feature
   config.include Capybara::DSL
+  config.include FactoryGirl::Syntax::Methods
+
+  FactoryGirl.definition_file_paths = %w{./factories ./test/factories ./spec/factories}
+  FactoryGirl.find_definitions
+
+  config.before :all do
+    FactoryGirl.reload
+    NoBrainer.drop!
+    NoBrainer.sync_schema
+  end
+
+  config.before :each do
+    NoBrainer.purge!
+  end
+
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
   end
