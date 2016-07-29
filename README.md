@@ -1,6 +1,9 @@
 # varys
 A search engine
 
+## Tests
+To run tests run 'nosetests' from inside the project folder
+
 ## Timeline 
 
 ### Week 1 
