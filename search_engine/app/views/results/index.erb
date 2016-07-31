@@ -1,22 +1,7 @@
 <header>
   <h1><a href="/">varys</a></h1><%=erb :'partials/_search_box' %>
 </header>
+
 <% @results.each do |result| %>
-  <article id="result_<%= result['id'] %>">
-    <span id="result_<%= result['id'] %>_title">
-      <h2>
-        <a href="<%= result['url'] %>">
-          <%= output_result(result['title'], @query) %>
-        </a>
-      </h2>
-    </span>
-    <span id="result_<%= result['id'] %>_url">
-      <h3>
-        <%= output_result(result['url'], @query, true) %>
-      </h3>
-    </span>
-    <span id="result_<%= result['id'] %>_description">
-      <%= output_result(result['description'], @query) %>
-    </span>
-  </article>
+  <%=erb :'partials/_result', locals: { result: result } %>
 <% end %>
