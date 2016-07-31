@@ -17,7 +17,7 @@ class Varys < Sinatra::Base
     # (postgres full text searching looks for whole words/strings so won't
     # match a partial url, thus we have to use LIKE)
 
-    @results = Webpage.find_by_sql("SELECT title, description, url
+    @results = Webpage.find_by_sql("SELECT id, title, description, url
                                     FROM webpages
                                     WHERE to_tsvector('english', title || description) @@ plainto_tsquery('english', '#{@query}')
                                     OR    url LIKE '%#{@query}%'")

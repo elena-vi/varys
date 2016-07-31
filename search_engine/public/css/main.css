@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+header {
+  background-color: #EEF1EF;
+  border-bottom: 1px solid #d2dad5;
+  padding: 20px;
+  vertical-align: middle;
+}
+
+header h1 {
+  font-family: 'Philosopher', sans-serif;
+  font-size: 2em;
+}
+
+header a {
+  color: #474647 !important;
+}
+
+header a:hover {
+  text-decoration: none;
+}
+
+header h1, form {
+  display: inline-flex;
+  margin: 0;
+}
+
+article {
+  padding: 20px;
+  margin: 0;
+}
+
+article h2, h3 {
+  margin: 0;
+  font-weight: normal;
+  line-height: 1.4;
+}
+
+article h2 {
+  font-size: 1.1em;
+}
+
+a, a:visited, a:active {
+  color: #007FFF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+article h3 {
+  font-size: 1em;
+  color: #DC0073;
+}
+
+input {
+  padding: 10px;
+  margin: 0;
+}
+
+input[type=submit] {
+  padding: 10px;
+}

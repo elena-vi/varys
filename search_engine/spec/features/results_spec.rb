@@ -41,4 +41,26 @@ feature 'Results page' do
 
     expect(page).to have_content(result_1.url)
   end
+
+  scenario 'it highlights query string matches' do
+    result_1 = FactoryGirl.create(:webpage)
+
+    visit '/results?q=portsmouth+news'
+
+    id = result_1.id
+
+    within "article#result_#{id}" do
+      within "span#result_#{id}_title" do
+        expect(page).to have_selector('span', text: 'Portsmouth')
+      end
+
+      within "span#result_#{id}_url" do
+        expect(page).to have_selector('span', text: 'portsmouth')
+      end
+
+      within "span#result_#{id}_description" do
+        expect(page).to have_selector('span', text: 'Portsmouth')
+      end
+    end
+  end
 end
