@@ -50,16 +50,17 @@ feature 'Results page' do
     id = result_1.id
 
     within "article#result_#{id}" do
+      puts page.html
       within "span#result_#{id}_title" do
-        expect(page).to have_selector('span', text: 'Portsmouth')
+        expect(page).to have_selector('span', text: 'Portsmouth', exact: true)
       end
 
       within "span#result_#{id}_url" do
-        expect(page).to have_selector('span', text: 'portsmouth')
+        expect(page).to have_selector('span', text: 'portsmouth', exact: true)
       end
 
       within "span#result_#{id}_description" do
-        expect(page).to have_selector('span', text: 'Portsmouth')
+        expect(page).to have_selector('span', text: 'Portsmouth', exact: true)
       end
     end
   end

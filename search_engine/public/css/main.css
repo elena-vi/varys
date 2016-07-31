@@ -13,6 +13,7 @@ header {
 header h1 {
   font-family: 'Philosopher', sans-serif;
   font-size: 2em;
+  width: 100px;
 }
 
 header a {
@@ -28,9 +29,20 @@ header h1, form {
   margin: 0;
 }
 
-article {
-  padding: 20px;
+header input {
+  padding: 10px;
   margin: 0;
+  outline: none;
+}
+
+header input[type="submit"] {
+  padding: 10px;
+}
+
+article {
+  padding: 20px 0 0 20px;
+  margin: 0 0 0 100px;
+  max-width: 600px;
 }
 
 article h2, h3 {
@@ -57,11 +69,6 @@ article h3 {
   color: #DC0073;
 }
 
-input {
-  padding: 10px;
-  margin: 0;
-}
-
-input[type=submit] {
-  padding: 10px;
+span span {
+  font-weight: bold !important;
 }
