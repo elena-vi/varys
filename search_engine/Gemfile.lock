@@ -34,6 +34,8 @@ GEM
     diff-lcs (1.2.5)
     dm-aggregates (1.2.0)
       dm-core (~> 1.2.0)
+    dm-ar-finders (1.2.0)
+      dm-core (~> 1.2.0)
     dm-constraints (1.2.0)
       dm-core (~> 1.2.0)
     dm-core (1.2.1)
@@ -106,6 +108,8 @@ GEM
       rack (~> 1.5)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
+    sinatra-partial (1.0.0)
+      sinatra (~> 1.4)
     stringex (1.5.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
@@ -122,10 +126,12 @@ DEPENDENCIES
   capybara
   data_mapper
   database_cleaner
+  dm-ar-finders
   dm-postgres-adapter
   factory_girl
   rspec
   sinatra
+  sinatra-partial
 
 RUBY VERSION
    ruby 2.2.3p173

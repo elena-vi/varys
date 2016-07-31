@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'data_mapper'
+require 'dm-ar-finders'
 
 require_relative 'models/webpage'
 

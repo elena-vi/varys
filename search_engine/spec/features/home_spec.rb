@@ -18,6 +18,6 @@ feature 'Home page' do
     fill_in :search_query, with: 'news'
     click_button :search
     expect(current_path).to eq('/results')
-    expect(page).to have_content('news')
+    expect(page).to have_selector('input[value="news"]')
   end
 end

@@ -25,4 +25,20 @@ feature 'Results page' do
     expect(page).not_to have_content(result_2.description)
     expect(page).not_to have_content(result_2.url)
   end
+
+  scenario 'returns result when given partial url' do
+    result_1 = FactoryGirl.create(:webpage)
+
+    visit '/results?q=portsmouth.co.uk'
+
+    expect(page).to have_content(result_1.url)
+  end
+
+  scenario 'can handle multiple word queries' do
+    result_1 = FactoryGirl.create(:webpage)
+
+    visit '/results?q=portsmouth+news'
+
+    expect(page).to have_content(result_1.url)
+  end
 end
