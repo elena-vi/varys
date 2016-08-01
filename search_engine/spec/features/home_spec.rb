@@ -11,7 +11,7 @@ feature 'Home page' do
   end
 
   it 'has a search button' do
-    expect(page).to have_selector("input[type='submit'][value='search']")
+    expect(page).to have_selector("input[type='submit'][name='search']")
   end
 
   it 'takes you to results page when you click search' do
