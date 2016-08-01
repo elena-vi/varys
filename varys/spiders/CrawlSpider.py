@@ -1,9 +1,8 @@
-from scrapy.spiders import CrawlSpider, Rule
-from scrapy.linkextractors.sgml import SgmlLinkExtractor
+from scrapy.spiders import CrawlSpider
 from scrapy.selector import HtmlXPathSelector
 from scrapy import Request
-from varys.items import VarysItem
 
+from varys.items import VarysItem
 from varys.src.urlParser import Parser
 
 class CrawlSpider(CrawlSpider):
