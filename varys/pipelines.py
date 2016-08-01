@@ -4,14 +4,14 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
-import rethinkdb as r
-from database import VarysDatabase
+#import rethinkdb as r
+#from database import VarysDatabase
 
 
 class VarysPipeline(object):
 
 	def open_spider(self, spider):
-		VarysDatabase().connect()
+		#VarysDatabase().connect()
 		pass
 
 	def process_item(self, item, spider):
