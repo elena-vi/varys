@@ -73,18 +73,17 @@ feature 'Results page' do
   end
 
   context 'dealing with pages' do
-
     before do
       results = []
 
       15.times do
         results << FactoryGirl.create(:webpage)
       end
-
-      visit '/results?q=portsmouth+news'
     end
 
     scenario 'it only shows 10 results on first page' do
+      visit '/results?q=portsmouth+news'
+
       10.times do |i|
         id = i + 8
         expect(page).to have_css("article#result_#{id}")
@@ -94,12 +93,26 @@ feature 'Results page' do
     end
 
     scenario 'it displays more results on page two' do
+      visit '/results?q=portsmouth+news&start=10'
+
       5.times do |i|
-        id = i + 23
+        id = i + 33
         expect(page).to have_css("article#result_#{id}")
       end
 
-      expect(page).not_to have_css("article#result_22")
+      expect(page).not_to have_css("article#result_32")
+    end
+
+    scenario 'it links to the next 10 results' do
+      visit '/results?q=portsmouth+news'
+
+      puts page.html
+
+      within 'div#pages' do
+        click_link '2'
+      end
+
+      expect(current_path).to eq '/results?q=portsmouth+news&start=10'
     end
   end
 end

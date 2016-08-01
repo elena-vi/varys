@@ -13,7 +13,7 @@ class Webpage
                                 FROM webpages
                                 WHERE to_tsvector('english', title || description)
                                 @@ plainto_tsquery('english', '#{query_string}')
-                                OR    url LIKE '%#{query_string}%'
+                                OR url LIKE '%#{query_string}%'
                                 LIMIT 10 OFFSET #{query_from}")
 
     convert_results_to_objects(results)
@@ -22,8 +22,6 @@ class Webpage
   private
 
   def self.convert_results_to_objects(results)
-    # Raw sql queries don't return results as objects, so replaced every result
-    # with a new instance of Webpage (new doesn't save to the db)
     results.map do |result|
       Webpage.new(title: result['title'],
                   url: result['url'],
