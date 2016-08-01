@@ -12,37 +12,26 @@ class CrawlSpider(CrawlSpider):
     start_urls = (
         'http://news.bbc.co.uk/',
     )
-
-#rules = (
-#        Rule(SgmlLinkExtractor(allow=(), restrict_xpaths=('//a',)), callback="parse_items", follow= True),
-#    )
-
+    
+    
     def parse(self, response):
       for newRequest in self.newRequests(response):
           yield newRequest
       for newItem in self.newItems(response):
           yield newItem
-      
-      
-
 
     def newRequests(self, response):
       array = []
-
       for link in response.xpath('//a/@href').extract():
         parsed = Parser(link).joinDomain(response.url)
         if (parsed.approved):
           array.append( Request(parsed.fullUrl(), callback=self.parse) )
-      
       return array
-
 
     def newItems(self, response):
       array = []
-
       item = VarysItem()
       item["link"] = response.url
       item["title"] = response.xpath("//title/text()").extract()
       array.append(item)
-
       return array
