@@ -1,19 +1,15 @@
-" ============================================================================
-" Netrw Directory Listing                                        (netrw v149)
-"   /home/o/Workspace/varys/varys/spiders
-"   Sorted by      name
-"   Sort sequence: [\/]$,\<core\%(\.\d\+\)\=\>,\.h$,\.c$,\.cpp$,\~\=\*$,*,\.o$,\.obj$,\.info$,\.swp$,\.bak$,\~$
-"   Quick Help: <F1>:help  -:go up dir  D:delete  R:rename  s:sort-by  x:exec
-" ============================================================================
-../
-varys/
-| .git/
-| tests/
-| | url_test.py
-| | url_test.pyc
-| varys/
-| .gitignore
-| MANIFEST
-| README.md
-| scrapy.cfg
-| setup.py
+from distutils.core import setup
+
+setup(
+    name='varys',
+    version='1.0.0',
+    packages=['varys', 'varys.spiders'],
+    url='https://github.com/elena-vi/varys',
+    license='',
+    author='Elena, Alex, Joe, Oliver',
+    author_email='',
+    description='A search engine',
+    install_requires=[
+        'Scrapy==1.1.1'
+    ],
+)
