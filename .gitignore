@@ -89,3 +89,4 @@ ENV/
 .ropeproject
 
 .idea/
+rethinkdb_data/
