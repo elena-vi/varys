@@ -3,6 +3,7 @@ from scrapy.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.selector import HtmlXPathSelector
 from varys.items import VarysItem
 
+from varys.src.urlParser import Parser
 
 class CrawlSpider(CrawlSpider):
     name = "varys"
