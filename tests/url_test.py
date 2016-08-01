@@ -15,8 +15,8 @@ class UrlsTests(unittest.TestCase):
     self.assertEqual(joined.fullUrl(), 'http://www.bbc.co.uk/sport/tennis/silly.htm')
 
   def test_Join_Path2(self):
-    domain = 'http://www.bbc.co.uk'
-    path = 'http://wrong.com/sport/tennis/silly.htm'
+    domain = 'http://wrong.com/'
+    path = 'http://www.bbc.co.uk/sport/tennis/silly.htm'
     joined = Parser(path).joinDomain(domain)
     self.assertEqual(joined.fullUrl(), 'http://www.bbc.co.uk/sport/tennis/silly.htm')
 

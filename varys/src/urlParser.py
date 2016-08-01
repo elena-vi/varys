@@ -10,8 +10,10 @@ class Parser:
     return u.scheme + '://' + u.netloc + u.path
 
   def joinDomain(self, dom):
-    u = self.url    
-    self.__init__(urlsplit(dom).scheme + '://' + urlsplit(dom).netloc + u.path + u.query + u.fragment)
+    u = self.url
+    if(len(u.netloc) == 0):
+      newUrl = urlsplit(dom).scheme + '://' + urlsplit(dom).netloc + u.path + u.query + u.fragment
+      self.__init__(newUrl)
     return self
 
   def approved(self):

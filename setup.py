@@ -10,8 +10,6 @@ setup(
     author_email='',
     description='A search engine',
     install_requires=[
-    		'Scrapy==1.1.1',
-    		'remodel==0.4.4',
-    		'rethinkdb==2.3.0.post5'
+        'Scrapy==1.1.1'
     ],
 )
