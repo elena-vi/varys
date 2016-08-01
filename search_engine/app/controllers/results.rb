@@ -1,8 +1,8 @@
 class Varys < Sinatra::Base
   get '/results' do
     @query = params[:q]
-    # see Webpage model for method
-    @results = Webpage.do_search(@query)
+    @start = params[:start] || "0"
+    @results = Webpage.do_search(@query, @start)
     erb :'results/index'
   end
 end
