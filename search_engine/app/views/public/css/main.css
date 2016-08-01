@@ -1,0 +1,136 @@
+body {
+  margin: 0;
+  font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+header {
+  background-color: #EEF1EF;
+  border-bottom: 1px solid #d2dad5;
+  padding: 10px 10px 10px 20px;
+  vertical-align: middle;
+  overflow: auto;
+}
+
+header h1 {
+  font-size: 2em;
+  font-weight: lighter;
+  width: 100px;
+}
+
+header a {
+  color: #474647 !important;
+}
+
+header a:hover {
+  text-decoration: none;
+}
+
+header h1, form {
+  float: left;
+  margin: 0;
+}
+
+header input[type=text] {
+  width: 550px;
+  margin: 0;
+  height: 18px;
+  border: 1px solid #d2dad5;
+}
+
+header input[type=text]:hover {
+  border-color: #bfcbc4;
+}
+
+header input[type=text]:focus {
+  border-color: #007FFF;
+}
+
+header input[type=submit] {
+  text-align: center;
+  border-radius: 2px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  height: 40px;
+  margin: 0 0 0 -2px;
+  width: 40px;
+  background-color: #DC0073;
+  background-image: url('../images/search.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  border: none;
+  color: #FFF;
+}
+
+header input[type=submit]:hover {
+  background-color: #cb006a;
+}
+
+article {
+  padding: 20px 0 0 20px;
+  margin: 0 0 0 100px;
+  max-width: 600px;
+}
+
+article h2, h3 {
+  margin: 0;
+  font-weight: normal;
+  line-height: 1.4;
+}
+
+article h2 {
+  font-size: 1.1em;
+}
+
+a, a:visited, a:active {
+  color: #007FFF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+article h3 {
+  font-size: 1em;
+  color: #DC0073;
+}
+
+span span {
+  font-weight: bold !important;
+}
+
+input {
+  outline: none;
+  font-size: 1em;
+  padding: 10px;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+    border: 0;
+}
+
+h1 {
+  font-size: 4em;
+  font-weight: lighter;
+}
+
+.home {
+  border-top: 1px solid #d2dad5;
+  text-align: center !important;
+}
+
+.home form {
+  float: none !important;
+}
+
+#landing {
+  margin: 10% auto;
+  text-align: center;
+}
+
+#pages {
+  padding: 20px 0 0 20px;
+  margin: 0 0 0 100px;
+}

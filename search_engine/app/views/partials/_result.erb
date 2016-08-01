@@ -1,0 +1,17 @@
+<article id="<%= r_css(result) %>">
+  <span id="<%= r_css(result, :title) %>">
+    <h2>
+      <a href="<%= result.url %>">
+        <%= output_result(result.title, @query) %>
+      </a>
+    </h2>
+  </span>
+  <span id="<%= r_css(result, :url) %>">
+    <h3>
+      <%= output_result(result.url, @query, true) %>
+    </h3>
+  </span>
+  <span id="<%= r_css(result, :description) %>">
+    <%= output_result(result.description, @query) %>
+  </span>
+</article>

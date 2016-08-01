@@ -1,0 +1,13 @@
+<header>
+  <h1><a href="/">varys</a></h1><%=erb :'partials/_search_box' %>
+</header>
+
+<% @results.each do |result| %>
+  <%= erb :'partials/_result', locals: { result: result } %>
+<% end %>
+
+<div id="pages">
+  <% get_pages_wrapper(@query, @start).each do |i| %>
+    <a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><%= i %></a> | 
+  <% end %>
+</div>
