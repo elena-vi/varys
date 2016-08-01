@@ -4,17 +4,20 @@ class VarysDatabase(object):
 
 	# def __init__(self):
 	# 	print 'hey?'
+	conn = psycopg2.connect("dbname=varys_development user=Elena")
+	cur = conn.cursor()
 
 	def connect(self):
-		print r.connect('localhost', 28015).repl()
-		print r.dbList()
-
+		self.cur.execute("CREATE TABLE IF NOT EXISTS test (id serial PRIMARY KEY, url varchar, title varchar);")
+		self.conn.commit()
 		pass
 
 	def insert(self, url, title):
-		r.connect('localhost', 28015).repl()
+		sql = "INSERT INTO test (url, title) VALUES ('{url}', '{title}')".format(url=url, title=title[0].encode('ascii',errors='ignore'))
+		self.cur.execute(sql)
+		self.conn.commit()
 		pass
 
-
-from database import VarysDatabase
-VarysDatabase().connect()
+	def close(self):
+		self.cur.close()
+		self.conn.close()

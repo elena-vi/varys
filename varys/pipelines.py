@@ -4,24 +4,36 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#import rethinkdb as r
-#from database import VarysDatabase
 
+import psycopg2
+from database import VarysDatabase
 
 class VarysPipeline(object):
 
 	def open_spider(self, spider):
-		#VarysDatabase().connect()
+		print '-----------'
+		print 'OPEN'
+		print '-----------'
+		VarysDatabase().connect()
 		pass
 
 	def process_item(self, item, spider):
-		# VarysDatabase().hey("yes")
-		# r.db('items').table('links').insert({ 'url': item["link"], 'title': item["title"]}).run()
+		print '-----------'
+		print 'PROCESS'
+		print '-----------'
+		VarysDatabase().insert(item["link"], item["title"])
 		return item
 
 	def close_spider(self, spider):
-		print '-----------------'
-		print 'close_spider'
-		print '-----------------'
-
+		print '-----------'
+		print 'CLOSE'
+		print '-----------'
+		VarysDatabase().close()
 		pass
+
+
+	# def connect(self):
+
+	# def insert(self, url, title):
+
+	# def close(self):
