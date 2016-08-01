@@ -8,7 +8,7 @@ class Tests(unittest.TestCase):
 
   def test_newRequests(self):
     requests = CrawlSpider().newRequests(ResponseStub())
-    self.assertEqual(requests[0].url, 'http://www.foundlink.com/found_eath')
+    self.assertEqual(requests[0].url, 'http://www.foundlink.com/found_path')
 
   def test_newItems(self):
     items = CrawlSpider().newItems(ResponseStub())
