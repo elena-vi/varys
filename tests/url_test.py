@@ -26,5 +26,10 @@ class UrlsTests(unittest.TestCase):
     joined = Parser(path).joinDomain(domain)
     self.assertEqual(joined, 'http://www.bbc.co.uk/sport/tennis/silly.htm')
 
+  def test_Approve_Link(self):
+    url = 'http://www.bbc.co.uk/news/example.html?boring'
+    self.assertTrue(Parser(url).approved())
+
+
 if __name__ == '__main__':
   unittest.main()
