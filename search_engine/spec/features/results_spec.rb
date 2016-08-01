@@ -1,4 +1,12 @@
 feature 'Results page' do
+  scenario 'displays no results if query string empty' do
+    result = FactoryGirl.create(:webpage)
+
+    visit '/results?q='
+
+    expect(page).not_to have_content(result.title)
+  end
+
   scenario 'displays a result' do
     result = FactoryGirl.create(:webpage)
 

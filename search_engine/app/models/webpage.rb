@@ -7,6 +7,7 @@ class Webpage
   property :url, String, length: 255, required: true
 
   def self.do_search(query_string)
+    return [] if query_string == ""
     # dm-ar-finders installed and required into data_mapper_setup, which allows
     # direct querying of the database (raw SQL) by using find_by_sql on the
     # model.

@@ -12,7 +12,6 @@ header {
 }
 
 header h1 {
-  /*font-family: 'Philosopher', sans-serif;*/
   font-size: 2em;
   font-weight: lighter;
   width: 100px;
@@ -110,4 +109,23 @@ input {
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
     border: 0;
+}
+
+h1 {
+  font-size: 4em;
+  font-weight: lighter;
+}
+
+.home {
+  border-top: 1px solid #d2dad5;
+  text-align: center !important;
+}
+
+.home form {
+  float: none !important;
+}
+
+#landing {
+  margin: 10% auto;
+  text-align: center;
 }
