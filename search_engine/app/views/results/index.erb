@@ -7,32 +7,7 @@
 <% end %>
 
 <div id="pages">
-  <%
-  # if statement to see is self.do_search with current @start value + 10
-  # returns any results. If so then print new page link. How to print
-  # multiple pages???
-
-  def get_next_page(start_point=@start)
-    if Webpage.do_search(@query, start_point)
-  end
-
-  number_of_pages = @results.length / 10
-  last_page_results = @results.length % 10
-
-  p last_page_results
-
-  (1..number_of_pages).each do |i|
-    start = (i - 1) * 10
-  %>
-    <a href="/results?q=<%= @query %>&start=<%= start %>"><%= i %></a>
-  <%
-  end
-
-  if last_page_results > 0
-    start = number_of_pages * 10
-  %>
-    <a href="/results?q=<%= @query %>&start=<%= start %>"><%= (number_of_pages + 1) %></a>
-  <%
-  end
-  %>
+  <% get_pages_wrapper(@query, @start).each do |i| %>
+    <a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><%= i %></a> | 
+  <% end %>
 </div>

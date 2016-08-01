@@ -106,13 +106,13 @@ feature 'Results page' do
     scenario 'it links to the next 10 results' do
       visit '/results?q=portsmouth+news'
 
-      puts page.html
-
       within 'div#pages' do
         click_link '2'
       end
 
-      expect(current_path).to eq '/results?q=portsmouth+news&start=10'
+      expect(current_path).to eq '/results'
+      expect(page).to have_css("article#result_48")
+      expect(page).not_to have_css("article#result_47")
     end
   end
 end

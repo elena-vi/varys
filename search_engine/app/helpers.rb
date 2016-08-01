@@ -15,4 +15,25 @@ module Helpers
     underscore = field.nil? ? "" : "_"
     "result_#{row.id}#{underscore}#{field.to_s}"
   end
+
+  def get_pages_wrapper(query, start_point)
+    pages_array = [1]
+    get_pages(query, pages_array, start_point)
+  end
+
+  def get_pages(query, pages_array, start_point)
+    sp = (start_point.to_i + 10)
+
+    if Webpage.do_search(query, sp).length > 0
+      pages_array << (pages_array.last + 1)
+      get_pages(query, pages_array, sp)
+    else
+      return pages_array
+    end
+  end
+
+  def get_start_number(page_number)
+    (page_number - 1) * 10
+  end
+
 end
