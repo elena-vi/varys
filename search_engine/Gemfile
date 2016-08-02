@@ -1,0 +1,15 @@
+source 'https://rubygems.org'
+ruby '2.2.3'
+
+gem 'sinatra'
+gem 'data_mapper'
+gem 'dm-postgres-adapter'
+gem 'dm-ar-finders'
+gem 'sinatra-partial'
+
+group :test do
+  gem 'rspec'
+  gem 'capybara'
+  gem 'factory_girl'
+  gem 'database_cleaner'
+end
