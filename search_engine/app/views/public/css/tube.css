@@ -1,21 +1,28 @@
 #tube{
   color: #fff;
-  text-align: right;
-}
-#tube li::before{
-  content: attr(data-name)
+  list-style-type: none;
+  position: relative;
+  padding: 0;
+  margin: 0;
+  width: 310px;
 }
 
-#tube li span{
+#tube li {
+  padding: 10px;
+}
+.status{
+  float: right;
+}
+#tube li .reason{
   display: none;
   position: absolute;
   background: inherit;
   padding: 10px;
   width: 336px;
-  margin-top: -18px;
+  margin-top: -24px;
   text-align: left;
 }
-#tube li:hover span{
+#tube li:hover .reason{
   display: block;
 }
 

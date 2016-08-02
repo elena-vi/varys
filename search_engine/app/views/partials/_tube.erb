@@ -1,16 +1,14 @@
 <% if tube %>
+	<h2>Current Line Status:</h2>
 	<ol id="tube">
 	<% tube.each do |line| %>
-		<li id="<%= line["id"] %>" data-name="<%= line["name"] %>">
-			<%= line["lineStatuses"][0]["statusSeverityDescription"] %>
+		<li id="<%= line["id"] %>" data-name="">
+			<span class="name"><%= line["name"] %></span>
+			<span class="status"><%= line["lineStatuses"][0]["statusSeverityDescription"] %></span>
 			<% if line["lineStatuses"][0]["reason"] %>
-				<span><%= line["lineStatuses"][0]["reason"] %></span>
+				<span class="reason"><%= line["lineStatuses"][0]["reason"] %></span>
 			<% end %>
 		</li>
 	<% end %>
 	</ol>
 <% end %>
-
-
-
-<h1>The tube works</h1>
