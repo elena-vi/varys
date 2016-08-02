@@ -1,81 +1,91 @@
 feature 'Results page' do
-  scenario 'displays no results if query string empty' do
-    result = FactoryGirl.create(:webpage)
 
-    visit '/results?q='
+  context 'user enters a search query' do
 
-    expect(page).not_to have_content(result.title)
-  end
+    let!(:result) { FactoryGirl.create(:webpage) }
 
-  scenario 'displays a result' do
-    result = FactoryGirl.create(:webpage)
+    scenario 'displays no results if query string empty' do
+      visit '/results?q='
 
-    visit '/results?q=news'
+      expect(page).not_to have_content(result.title)
+    end
 
-    expect(page).to have_content(result.title)
-    expect(page).to have_content(result.description)
-    expect(page).to have_content(result.url)
-  end
+    scenario 'displays a result' do
+      visit '/results?q=news'
 
-  scenario 'only displays the relevant news result' do
-    result_1 = FactoryGirl.create(:webpage)
-    result_2 = FactoryGirl.create(:webpage, title: 'Fox',
-                                            description: 'Foxes are furry',
-                                            url: 'http://foxes.com')
+      expect(page).to have_content(result.title)
+      expect(page).to have_content(result.description)
+      expect(page).to have_content(result.url)
+    end
 
-    visit '/results?q=news'
+    scenario 'only displays the relevant news result' do
+      result_2 = FactoryGirl.create(:webpage, title: 'Fox',
+      description: 'Foxes are furry',
+      url: 'http://foxes.com')
 
-    expect(page).to have_content(result_1.title)
-    expect(page).to have_content(result_1.description)
-    expect(page).to have_content(result_1.url)
+      visit '/results?q=news'
 
-    expect(page).not_to have_content(result_2.title)
-    expect(page).not_to have_content(result_2.description)
-    expect(page).not_to have_content(result_2.url)
-  end
+      expect(page).to have_content(result.title)
+      expect(page).to have_content(result.description)
+      expect(page).to have_content(result.url)
 
-  scenario 'returns result when given partial url' do
-    result_1 = FactoryGirl.create(:webpage)
+      expect(page).not_to have_content(result_2.title)
+      expect(page).not_to have_content(result_2.description)
+      expect(page).not_to have_content(result_2.url)
+    end
 
-    visit '/results?q=portsmouth.co.uk'
+    scenario 'returns result when given partial url' do
+      visit '/results?q=portsmouth.co.uk'
 
-    expect(page).to have_content(result_1.url)
-  end
+      expect(page).to have_content(result.url)
+    end
 
-  scenario 'can handle multiple word queries' do
-    result_1 = FactoryGirl.create(:webpage)
+    scenario 'can handle multiple word queries' do
+      visit '/results?q=portsmouth+news'
 
-    visit '/results?q=portsmouth+news'
+      expect(page).to have_content(result.url)
+    end
 
-    expect(page).to have_content(result_1.url)
-  end
+    scenario 'it highlights query string matches' do
+      visit '/results?q=portsmouth+news'
 
-  scenario 'it highlights query string matches' do
-    result_1 = FactoryGirl.create(:webpage)
+      id = result.id
 
-    visit '/results?q=portsmouth+news'
+      within "article#result_#{id}" do
+        within "span#result_#{id}_title" do
+          expect(page).to have_selector('span', text: 'Portsmouth', exact: true)
+        end
 
-    id = result_1.id
+        within "span#result_#{id}_url" do
+          expect(page).to have_selector('span', text: 'portsmouth', exact: true)
+        end
 
-    within "article#result_#{id}" do
-      within "span#result_#{id}_title" do
-        expect(page).to have_selector('span', text: 'Portsmouth', exact: true)
+        within "span#result_#{id}_description" do
+          expect(page).to have_selector('span', text: 'Portsmouth', exact: true)
+        end
       end
+    end
 
-      within "span#result_#{id}_url" do
-        expect(page).to have_selector('span', text: 'portsmouth', exact: true)
-      end
+    scenario 'it has one result' do
+      visit '/results?q=portsmouth+news'
 
-      within "span#result_#{id}_description" do
-        expect(page).to have_selector('span', text: 'Portsmouth', exact: true)
-      end
+      expect(page).to have_content('1 result')
+    end
+
+    scenario 'it two results' do
+      FactoryGirl.create(:webpage)
+      
+      visit '/results?q=portsmouth+news'
+
+      expect(page).to have_content('2 results')
     end
   end
 
   context 'dealing with pages' do
-    before do
-      results = []
 
+    let(:results) { [] }
+
+    before do
       15.times do
         results << FactoryGirl.create(:webpage)
       end
@@ -84,23 +94,27 @@ feature 'Results page' do
     scenario 'it only shows 10 results on first page' do
       visit '/results?q=portsmouth+news'
 
+      id = 0
+
       10.times do |i|
-        id = i + 8
+        id = results.first.id + i
         expect(page).to have_css("article#result_#{id}")
       end
 
-      expect(page).not_to have_css("article#result_18")
+      expect(page).not_to have_css("article#result_#{id + 1}")
     end
 
     scenario 'it displays more results on page two' do
       visit '/results?q=portsmouth+news&start=10'
 
+      id = 0
+
       5.times do |i|
-        id = i + 33
+        id = results.first.id + i + 10
         expect(page).to have_css("article#result_#{id}")
       end
 
-      expect(page).not_to have_css("article#result_32")
+      expect(page).not_to have_css("article#result_#{id + 1}")
     end
 
     scenario 'it links to the next 10 results' do
@@ -111,8 +125,8 @@ feature 'Results page' do
       end
 
       expect(current_path).to eq '/results'
-      expect(page).to have_css("article#result_48")
-      expect(page).not_to have_css("article#result_47")
+      expect(page).to have_css("article#result_#{results.last.id}")
+      expect(page).not_to have_css("article#result_#{results.first.id}")
     end
   end
 end
