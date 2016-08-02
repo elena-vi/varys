@@ -47,14 +47,6 @@ class Widgets
       result << { id: line["id"], name: line["name"], status: line["lineStatuses"][0]["statusSeverityDescription"], reason: line["lineStatuses"][0]["reason"]}
     end
     result
-    # <% tube.each do |line| %>
-    #   <%= line["id"] %>
-    #   <%= line["name"] %>
-    #   <%= line["lineStatuses"][0]["statusSeverityDescription"] %>
-    #   <% if line["lineStatuses"][0]["reason"] %>
-    #     <%= line["lineStatuses"][0]["reason"] %></span>
-    #   <% end %>
-    # <% end %>
   end
 
   def self.do_example_search
