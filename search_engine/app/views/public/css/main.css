@@ -151,10 +151,6 @@ h1 {
   text-align: center;
 }
 
-#pages {
-  margin: 40px 0 0 120px;
-}
-
 #stats {
   padding: 20px 0 20px 20px;
   margin: 0 0 0 100px;
@@ -191,11 +187,26 @@ h1 {
   word-wrap: normal;
 }
 
+#pages {
+  margin: 20px 0 0 120px;
+  text-align: center;
+}
+
 .page {
-  padding: 10px;
+  display: inline-block;
+}
+
+.page a, .page_active a {
+  padding: 7px;
+  font-size: 0.8em;
   border: 1px solid #007FFF;
-  margin: 0 5px 5px 0;
-  float: left;
+  margin: 0 7px 7px 0;
+}
+
+.page_active a {
+  background-color: #007FFF;
+  color: #FFF;
+  font-weight: bold;
 }
 
 .description {

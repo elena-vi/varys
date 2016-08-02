@@ -16,7 +16,7 @@
 
     <div id="pages">
       <% get_pages_wrapper(@query, @start).each do |i| %>
-        <a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><div class="page"><%= i %></div></a>
+        <div class="page"><a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><%= i %></a></div>
       <% end %>
     </div>
   </div>
