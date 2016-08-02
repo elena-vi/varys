@@ -12,4 +12,5 @@ class VarysItem(scrapy.Item):
 
 	link = scrapy.Field()
 	title = scrapy.Field()
+	description = scrapy.Field()
 	pass # commented because not sure if needed, works without it tho

@@ -34,7 +34,7 @@ feature 'Results page' do
       expect(page).not_to have_content(result_2.url)
     end
 
-    scenario 'returns result when given partial url' do
+    xscenario 'returns result when given partial url' do
       visit '/results?q=portsmouth.co.uk'
 
       expect(page).to have_content(result.url)
@@ -78,25 +78,6 @@ feature 'Results page' do
       visit '/results?q=portsmouth+news'
 
       expect(page).to have_content('2 results')
-    end
-  end
-
-  context 'serving up widgets' do
-
-    scenario 'doesnt show a wikipedia page if one not found' do
-      visit '/results?q=tesla'
-
-      expect(page).not_to have_css("div#wikipedia")
-      expect(page).not_to have_link('Wikipedia', href: 'https://en.wikipedia.org/wiki/Tesla_Motors')
-    end
-
-    scenario 'doesnt show a wikipedia page if one not found' do
-      visit '/results?q=tesla%20motors'
-
-      within "div#wikipedia" do
-        expect(page).to have_content('Tesla Motors')
-        expect(page).to have_link('Wikipedia', href: 'https://en.wikipedia.org/wiki/Tesla_Motors')
-      end
     end
   end
 

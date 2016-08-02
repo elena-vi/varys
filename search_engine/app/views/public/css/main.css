@@ -164,6 +164,7 @@ h1 {
 }
 
 #widgets {
+  width: 350px;
   margin: 20px 0 20px 120px;
 }
 
@@ -184,7 +185,6 @@ h1 {
 
 #widget_body {
   padding: 20px;
-  word-wrap: normal;
 }
 
 #pages {

@@ -6,16 +6,15 @@ class Widgets
     widgets = {}
 
     actions = {
-      # insert new call words here (as symbols), and the functions they call (declared below)
-      # weather: do_weather_search,
-      # tube: do_tube_search
+      tube: do_tube_search,
+      underground: do_tube_search,
+      status: do_tube_search
     }
 
     actions.each do |key, value|
       widgets[key] = value if query_string.include?(key.to_s)
     end
 
-    # declare any widgets here that run on any query
     widgets[:wikipedia] = do_wikipedia_search(query_string)
 
     widgets
@@ -28,6 +27,22 @@ class Widgets
     url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=#{query_string}&limit=1&namespace=0&format=json"
     response = RestClient.get(url)
     prettify_wikipedia_json(JSON.parse(response))
+  end
+
+  def self.do_tube_search
+    url = "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status"
+    response = RestClient::Request.execute(:url => url, :method => :get, :verify_ssl => false)
+    do_pretty_tube(JSON.parse(response))
+  end
+
+  def self.do_pretty_tube(json_results)
+    result = []
+
+    json_results.each do |line|
+      result << { id: line["id"], name: line["name"], status: line["lineStatuses"][0]["statusSeverityDescription"], reason: line["lineStatuses"][0]["reason"]}
+    end
+
+    result
   end
 
   def self.prettify_wikipedia_json(json)
