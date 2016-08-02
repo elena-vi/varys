@@ -11,8 +11,12 @@
       <%= output_result(result.url, @query) %>
     </h3>
   </span>
-  <span id="<%= r_css(result, :description) %>" class="description">
-    <%= output_result(result.description.strip[0...110], @query) %><%= ellipsis(result.description) %>
+  <span id="<%= r_css(result, :description) %>">
+    <h4>
+      <%= output_result(result.description.strip[0...110], @query) %><%= ellipsis(result.description) %>
+    </h4>
   </span>
-  <%= result.rank %>
+  <h5>
+    Rank: <%= result.rank %>
+  </h5>
 </article>

@@ -13,7 +13,7 @@ class Webpage
     # url_query = query_string.split(' ').length > 1 ? "OR url LIKE '%#{query_string}%'" : ""
 
     results = self.find_by_sql("SELECT id, title, description, url, ts_rank_cd(textsearch, query) AS rank
-                                FROM webpages, to_tsquery('#{query_string}') query, to_tsvector(title || description || url) textsearch
+                                FROM webpages, plainto_tsquery('english', '#{query_string}') query, to_tsvector(url || title || description) textsearch
                                 WHERE query @@ textsearch
                                 ORDER BY rank DESC
                                 LIMIT 10 OFFSET #{query_from}")
