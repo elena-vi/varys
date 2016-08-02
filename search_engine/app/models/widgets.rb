@@ -13,9 +13,7 @@ class Widgets
     }
 
     actions.each do |key, value|
-      if query_string.include?(key.to_s)
-        widgets[key] = value
-      end
+      widgets[key] = value if query_string.include?(key.to_s)
     end
 
     # declare any widgets here that run on any query

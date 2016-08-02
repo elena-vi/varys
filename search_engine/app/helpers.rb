@@ -40,4 +40,9 @@ module Helpers
     count != 1 ? word + 's' : word
   end
 
+  def shorten(string, length)
+    return "#{string[0...length]} ..." if string.length > length
+    string
+  end
+
 end

@@ -2,16 +2,16 @@
   <span id="<%= r_css(result, :title) %>">
     <h2>
       <a href="<%= result.url %>">
-        <%= output_result(result.title, @query) %>
+        <%= shorten(output_result(result.title, @query), 50) %>
       </a>
     </h2>
   </span>
   <span id="<%= r_css(result, :url) %>">
     <h3>
-      <%= output_result(result.url, @query, true) %>
+      <%= shorten(output_result(result.url, @query, true), 60) %>
     </h3>
   </span>
   <span id="<%= r_css(result, :description) %>">
-    <%= output_result(result.description, @query) %>
+    <%= shorten(output_result(result.description, @query), 150) %>
   </span>
 </article>
