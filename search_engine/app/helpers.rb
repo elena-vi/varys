@@ -36,4 +36,8 @@ module Helpers
     (page_number - 1) * 10
   end
 
+  def pluralise(word, count)
+    count != 1 ? word + 's' : word
+  end
+
 end

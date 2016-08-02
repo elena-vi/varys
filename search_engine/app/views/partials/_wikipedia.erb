@@ -1,0 +1,6 @@
+<% if !wikipedia.empty? %>
+  <div id='wikipedia'>
+    <h2> <%= wikipedia.first.title %> </h2>
+    <p><%= wikipedia.first.description %> <a href="<%= wikipedia.first.url %>">Wikipedia</a></p>
+  </div>
+<% end %>

@@ -134,3 +134,28 @@ h1 {
   padding: 20px 0 0 20px;
   margin: 0 0 0 100px;
 }
+
+#stats {
+  padding: 20px 0 20px 20px;
+  margin: 0 0 0 100px;
+  color: #91a498;
+  font-size: 0.8em;
+}
+
+#results, #widgets {
+  float: left;
+  max-width: 600px;
+}
+
+#widgets {
+  margin: 20px 0 0 120px;
+}
+
+#wikipedia {
+  padding: 10px;
+  border: 1px solid #d2dad5;
+}
+
+#wikipedia h2 {
+  margin: 0px;
+}
