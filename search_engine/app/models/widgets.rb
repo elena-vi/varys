@@ -8,7 +8,7 @@ class Widgets
     actions = {
       # insert new call words here (as symbols), and the functions they call (declared below)
       # weather: do_weather_search,
-      # tube: do_tube_search
+      tube: do_tube_search,
       example: do_example_search
     }
 
@@ -31,6 +31,12 @@ class Widgets
     url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=#{query_string}&limit=1&namespace=0&format=json"
     response = RestClient.get(url)
     prettify_wikipedia_json(JSON.parse(response))
+  end
+
+  def self.do_tube_search
+    url = "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status"
+    response = RestClient::Request.execute(:url => url, :method => :get, :verify_ssl => false)
+    JSON.parse(response)
   end
 
   def self.do_example_search

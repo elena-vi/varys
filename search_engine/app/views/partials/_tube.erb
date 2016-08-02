@@ -1,0 +1,16 @@
+<% if tube %>
+	<ol id="tube">
+	<% tube.each do |line| %>
+		<li id="<%= line["id"] %>" data-name="<%= line["name"] %>">
+			<%= line["lineStatuses"][0]["statusSeverityDescription"] %>
+			<% if line["lineStatuses"][0]["reason"] %>
+				<span><%= line["lineStatuses"][0]["reason"] %></span>
+			<% end %>
+		</li>
+	<% end %>
+	</ol>
+<% end %>
+
+
+
+<h1>The tube works</h1>
