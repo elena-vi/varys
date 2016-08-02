@@ -38,7 +38,23 @@ class Widgets
   def self.do_tube_search
     url = "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status"
     response = RestClient::Request.execute(:url => url, :method => :get, :verify_ssl => false)
-    JSON.parse(response)
+    do_pretty_tube(JSON.parse(response))
+  end
+
+  def self.do_pretty_tube(json_results)
+    result = []
+    json_results.each do |line|
+      result << { id: line["id"], name: line["name"], status: line["lineStatuses"][0]["statusSeverityDescription"], reason: line["lineStatuses"][0]["reason"]}
+    end
+    result
+    # <% tube.each do |line| %>
+    #   <%= line["id"] %>
+    #   <%= line["name"] %>
+    #   <%= line["lineStatuses"][0]["statusSeverityDescription"] %>
+    #   <% if line["lineStatuses"][0]["reason"] %>
+    #     <%= line["lineStatuses"][0]["reason"] %></span>
+    #   <% end %>
+    # <% end %>
   end
 
   def self.do_example_search

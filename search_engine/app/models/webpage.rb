@@ -9,7 +9,7 @@ class Webpage
   def self.do_search(query_string, query_from)
     return [] if query_string == ""
 
-    results = self.find_by_sql("SELECT *
+    results = self.find_by_sql("SELECT id, title, description, url
                                 FROM webpages
                                 WHERE to_tsvector('english', title || description)
                                 @@ plainto_tsquery('english', '#{query_string}')
