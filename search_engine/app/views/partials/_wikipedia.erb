@@ -1,6 +1,7 @@
-<% if !wikipedia.empty? %>
+<% if wikipedia && !wikipedia.empty? %>
   <div id='wikipedia'>
     <h2> <%= wikipedia.first.title %> </h2>
-    <p><%= wikipedia.first.description %> <a href="<%= wikipedia.first.url %>">Wikipedia</a></p>
+    <p> <%= wikipedia.first.description %> </p>
+    <a href="<%= wikipedia.first.url %>">Read more on Wikipedia</a>
   </div>
 <% end %>
