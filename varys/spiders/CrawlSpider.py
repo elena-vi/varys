@@ -7,9 +7,9 @@ from varys.src.urlParser import Parser
 
 class CrawlSpider(CrawlSpider):
     name = "varys"
-    allowed_domains = ["bbc.co.uk"]
+    allowed_domains = ["amazon.co.uk"]
     start_urls = (
-        'http://news.bbc.co.uk/',
+        'https://www.amazon.co.uk/',
     )
     
     
@@ -32,5 +32,6 @@ class CrawlSpider(CrawlSpider):
       item = VarysItem()
       item["link"] = response.url
       item["title"] = response.xpath("//title/text()").extract()
+      item["description"] = response.xpath("/html/head/meta[@name='description']/@content").extract()
       array.append(item)
       return array
