@@ -21,7 +21,7 @@ class VarysPipeline(object):
 		print '-----------'
 		print 'PROCESS'
 		print '-----------'
-		VarysDatabase().insert(item["link"], item["title"])
+		VarysDatabase().insert(item["link"], item["title"], item["description"])
 		return item
 
 	def close_spider(self, spider):

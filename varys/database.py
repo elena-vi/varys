@@ -9,15 +9,15 @@ class VarysDatabase(object):
 
 	def connect(self):
 		try:
-			self.cur.execute("CREATE TABLE IF NOT EXISTS test (id serial PRIMARY KEY, url varchar, title varchar);")
+			self.cur.execute("CREATE TABLE IF NOT EXISTS webpages (id serial PRIMARY KEY, url varchar, title varchar, description varchar);")
 			self.conn.commit()
 		except: 
 			self.conn.rollback()
 		pass
 
-	def insert(self, url, title):
+	def insert(self, url, title, description):
 		try:
-			sql = "INSERT INTO test (url, title) VALUES ('{url}', '{title}')".format(url=url, title=title[0].encode('ascii',errors='ignore'))
+			sql = "INSERT INTO webpages (url, title, description) VALUES ('{url}', '{title}', '{description}')".format(url=url, title=title[0].encode('ascii',errors='ignore'), description=description[0].encode('ascii',errors='ignore'))
 			self.cur.execute(sql)
 			self.conn.commit()
 		except: 
