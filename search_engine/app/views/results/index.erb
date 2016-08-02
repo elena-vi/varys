@@ -8,12 +8,20 @@
   in <%= Time.now - @now %> seconds
 </div>
 
-<% @results.each do |result| %>
-  <%= erb :'partials/_result', locals: { result: result } %>
+<% if @results.length > 0 %>
+  <div id='results'>
+    <% @results.each do |result| %>
+      <%= erb :'partials/_result', locals: { result: result } %>
+    <% end %>
+
+    <div id="pages">
+      <% get_pages_wrapper(@query, @start).each do |i| %>
+        <a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><%= i %></a> |
+      <% end %>
+    </div>
+  </div>
 <% end %>
 
-<div id="pages">
-  <% get_pages_wrapper(@query, @start).each do |i| %>
-    <a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><%= i %></a> |
-  <% end %>
+<div id='widgets'>
+  <%= erb :'partials/_wikipedia', locals: { wikipedia: @widgets[:wikipedia] } %>
 </div>
