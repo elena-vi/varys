@@ -9,7 +9,6 @@ class Widgets
       # insert new call words here (as symbols), and the functions they call (declared below)
       # weather: do_weather_search,
       # tube: do_tube_search
-      example: do_example_search
     }
 
     actions.each do |key, value|
@@ -29,10 +28,6 @@ class Widgets
     url = "https://en.wikipedia.org/w/api.php?action=opensearch&search=#{query_string}&limit=1&namespace=0&format=json"
     response = RestClient.get(url)
     prettify_wikipedia_json(JSON.parse(response))
-  end
-
-  def self.do_example_search
-    "HEY I'M AN EXAMPLE"
   end
 
   def self.prettify_wikipedia_json(json)

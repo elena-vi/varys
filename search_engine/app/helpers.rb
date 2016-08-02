@@ -1,14 +1,13 @@
 module Helpers
-  def output_result(field, query, ignore_whitespace=false)
+  def output_result(field, query)
     words = query.split(" ")
-    string = boldify_string(field, words, ignore_whitespace)
+    string = boldify_string(field, words)
   end
 
-  def boldify_string(string, words, ignore_whitespace)
+  def boldify_string(string, words)
     word = words.pop
-    whitespace = /./ unless ignore_whitespace
-    new_string = string.gsub(/#{word}#{whitespace}/i) { |s| "<span>#{s}</span>" }
-    words.empty? ? new_string : boldify_string(new_string, words, ignore_whitespace)
+    string.gsub!(/#{word}/i) { |s| "<span>#{s}</span>" } if string != ""
+    words.empty? ? string : boldify_string(string, words)
   end
 
   def r_css(row, field=nil)
@@ -40,9 +39,8 @@ module Helpers
     count != 1 ? word + 's' : word
   end
 
-  def shorten(string, length)
-    return "#{string[0...length]} ..." if string.length > length
-    string
+  def ellipsis(field)
+    "..." if field.length >= 110
   end
 
 end
