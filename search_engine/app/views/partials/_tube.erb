@@ -3,7 +3,6 @@
 		<div id='widget_header'>
 			<h2>Current Line Status</h2>
 		</div>
-		<div id='widget_body'>
 			<ol id="tube">
 			<% tube.each do |line| %>
 				<li id="<%= line[:id] %>" data-name="">
@@ -15,6 +14,5 @@
 				</li>
 			<% end %>
 			</ol>
-		</div>
 	</div>
 <% end %>

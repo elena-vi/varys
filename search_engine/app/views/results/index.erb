@@ -2,23 +2,19 @@
   <h1><a href="/">varys</a></h1><%=erb :'partials/_search_box' %>
 </header>
 
-<div id='stats'>
-  <%= @results.length %>
-  <%= pluralise('result', @results.length) %>
-  in <%= Time.now - @now %> seconds
-</div>
-
 <% if @results.length > 0 %>
   <div id='results'>
+    <div id='stats'>
+      <%= @count %>
+      <%= pluralise('result', @count) %>
+      in <%= Time.now - @now %> seconds
+    </div>
+
     <% @results.each do |result| %>
       <%= erb :'partials/_result', locals: { result: result } %>
     <% end %>
 
-    <div id="pages">
-      <% get_pages_wrapper(@query, @start).each do |i| %>
-        <div class="page"><a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><%= i %></a></div>
-      <% end %>
-    </div>
+
   </div>
 <% end %>
 
