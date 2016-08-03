@@ -2,41 +2,27 @@ require_relative 'result.rb'
 
 class Widgets
 
-  SOURCES = { tube:
-                [
-                  "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status",
-                  Proc.new { |query| query.include?('tube') }
-                ],
-              wikipedia:
-                [
-                  "https://en.wikipedia.org/w/api.php?action=opensearch&search=%s&limit=1&namespace=0&format=json",
-                  Proc.new { true }
-                ]
+  SOURCES = { tube: {
+                  name: 'tube',
+                  url: "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status",
+                  condition: Proc.new { |query| query.include?('tube') }
+                },
+              wikipedia: {
+                  name: 'wikipedia',
+                  url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=%s&limit=1&namespace=0&format=json",
+                  condition: Proc.new { true }
+                }
             }
 
   def self.all(query_string)
-    actions = {}
-
-    SOURCES.each do |widget, (url, condition)|
-      actions[widget] = Widgets.new(widget, query_string).get if condition.call(query_string)
-    end
-
-    # map = SOURCES.map do |widget, (url, condition)|
-    #   [(widget.to_sym) => Widgets.new(widget, query_string).get]
-    # end.compact
-    #
-    # p '--------------map'
-    # puts map
-    #
-    # p '---------------actions'
-    # puts actions
-
-    actions
+    SOURCES.select{ |name, widget| widget[:condition].call(query_string) }.map do |name, widget|
+      [name, Widgets.new(name, query_string).get]
+    end.to_h
   end
 
   def initialize(widget, query_string)
     @widget = widget
-    @url = SOURCES[widget][0] % query_string
+    @url = SOURCES[widget][:url] % query_string
   end
 
   def get
