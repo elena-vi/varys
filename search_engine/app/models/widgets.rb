@@ -6,21 +6,15 @@ class Widgets
     widgets = {}
 
     actions = {
-      # insert new call words here (as symbols), and the functions they call (declared below)
-      # weather: do_weather_search,
       tube: do_tube_search,
       underground: do_tube_search,
-      status: do_tube_search,
-      example: do_example_search
+      status: do_tube_search
     }
 
     actions.each do |key, value|
-      if query_string.include?(key.to_s)
-        widgets[key] = value
-      end
+      widgets[key] = value if query_string.include?(key.to_s)
     end
 
-    # declare any widgets here that run on any query
     widgets[:wikipedia] = do_wikipedia_search(query_string)
 
     widgets
@@ -43,14 +37,12 @@ class Widgets
 
   def self.do_pretty_tube(json_results)
     result = []
+
     json_results.each do |line|
       result << { id: line["id"], name: line["name"], status: line["lineStatuses"][0]["statusSeverityDescription"], reason: line["lineStatuses"][0]["reason"]}
     end
-    result
-  end
 
-  def self.do_example_search
-    "HEY I'M AN EXAMPLE"
+    result
   end
 
   def self.prettify_wikipedia_json(json)

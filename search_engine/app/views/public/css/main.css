@@ -31,7 +31,7 @@ header h1, form {
 }
 
 header input[type=text] {
-  width: 550px;
+  width: 500px;
   margin: 0;
   height: 18px;
   border: 1px solid #d2dad5;
@@ -72,7 +72,7 @@ article {
   max-width: 600px;
 }
 
-article h2, h3 {
+article h2, h3, h4, h5 {
   margin: 0;
   font-weight: normal;
   line-height: 1.4;
@@ -82,6 +82,32 @@ article h2 {
   font-size: 1.1em;
 }
 
+article h2 a {
+  display: block;
+  width: 500px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+article h3 {
+  font-size: 1em;
+  color: #DC0073;
+  width: 550px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+article h4 {
+  font-size: 1em;
+}
+
+article h5 {
+  font-size: 0.8em;
+  color: #d2dad5;
+}
+
 a, a:visited, a:active {
   color: #007FFF;
   text-decoration: none;
@@ -89,11 +115,6 @@ a, a:visited, a:active {
 
 a:hover {
   text-decoration: underline;
-}
-
-article h3 {
-  font-size: 1em;
-  color: #DC0073;
 }
 
 span span {
@@ -130,11 +151,6 @@ h1 {
   text-align: center;
 }
 
-#pages {
-  padding: 20px 0 0 20px;
-  margin: 0 0 0 100px;
-}
-
 #stats {
   padding: 20px 0 20px 20px;
   margin: 0 0 0 100px;
@@ -148,14 +164,51 @@ h1 {
 }
 
 #widgets {
-  margin: 20px 0 0 120px;
+  width: 350px;
+  margin: 20px 0 20px 120px;
 }
 
-#wikipedia {
-  padding: 10px;
-  border: 1px solid #d2dad5;
+#widget {
+  border: 1px solid #dbe2de;
+  box-shadow: 0px 0px 5px #c9d2cc;
 }
 
-#wikipedia h2 {
+#widget h2 {
   margin: 0px;
+  font-weight: 500;
+}
+
+#widget_header {
+  border-bottom: 1px solid #dbe2de;
+  padding: 20px;
+}
+
+#widget_body {
+  padding: 20px;
+}
+
+#pages {
+  margin: 20px 0 0 120px;
+  text-align: center;
+}
+
+.page {
+  display: inline-block;
+}
+
+.page a, .page_active a {
+  padding: 7px;
+  font-size: 0.8em;
+  border: 1px solid #007FFF;
+  margin: 0 7px 7px 0;
+}
+
+.page_active a {
+  background-color: #007FFF;
+  color: #FFF;
+  font-weight: bold;
+}
+
+.description {
+  display: block;
 }

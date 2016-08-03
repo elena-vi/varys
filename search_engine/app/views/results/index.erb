@@ -8,8 +8,6 @@
   in <%= Time.now - @now %> seconds
 </div>
 
-<%= @widgets[:example] %>
-
 <% if @results.length > 0 %>
   <div id='results'>
     <% @results.each do |result| %>
@@ -18,13 +16,18 @@
 
     <div id="pages">
       <% get_pages_wrapper(@query, @start).each do |i| %>
-        <a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><%= i %></a> |
+        <div class="page"><a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><%= i %></a></div>
       <% end %>
     </div>
   </div>
 <% end %>
 
 <div id='widgets'>
-  <%= erb :'partials/_tube', locals: { tube: @widgets[:tube] } %>
-  <%= erb :'partials/_wikipedia', locals: { wikipedia: @widgets[:wikipedia] } %>
+
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+  $.get('/widgets?q=<%= @query %>', function(data) {
+    $('#widgets').html(data)
+  })
+</script>
