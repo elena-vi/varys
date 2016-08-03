@@ -51,6 +51,7 @@ class Webpage
     # popularity table?
     #
     # loop through database again for both and adjust ranking accordingly
+    
     print "---------------"
     print results
     print "---------------\n"
@@ -59,20 +60,11 @@ class Webpage
 
   private
 
-  def self.convert_results_to_objects(results)
-    print '---------------'
-    print "CONVERT"
-    print "---------------\n"
-    results.map do |result|
-      print "--res-----\n"
-      print result['title']
-      print "--res-----\n"
-
-      Webpage.new(result['title'], result['url'], result['description'], result['rank'])
+  def self.convert_results_to_objects(query_results)
+    results = []
+    query_results.map do |result|
+      results << Webpage.new(result['title'], result['url'], result['description'], result['rank'])
     end
-    print "---------------"
-    print results.values
-    print "---------------\n"
     results
   end
 end
