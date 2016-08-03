@@ -1,2 +1,3 @@
-<%= erb :'partials/_tube', locals: { tube: @widgets[:tube] } %>
-<%= erb :'partials/_wikipedia', locals: { wikipedia: @widgets[:wikipedia] } %>
+<% @widgets.each do |name, widget| %>
+<%= erb :"partials/_#{name.to_s}", locals: { name => widget } %>
+<% end %>
