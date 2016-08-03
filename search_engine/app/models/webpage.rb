@@ -6,11 +6,12 @@ class Webpage
   property :description, String, length: 255, required: true
   property :url, String, length: 255, required: true
   property :rank, Float
+  property :clicks, Integer, default: 0
 
   def self.do_search(query_string, query_from)
     return [] if query_string == ""
 
-    results = self.find_by_sql("SELECT id, title, description, url, ts_rank_cd(textsearch, query) AS rank
+    results = self.find_by_sql("SELECT id, title, description, url, clicks, ts_rank_cd(textsearch, query) AS rank
                                 FROM webpages, plainto_tsquery('english', '#{query_string}') query, to_tsvector(url || title || description) textsearch
                                 WHERE query @@ textsearch
                                 ORDER BY rank DESC")
@@ -29,6 +30,7 @@ class Webpage
       url_length = get_extra_nodes(result.url).length
       result.rank -= (result.rank * 0.25) * url_length
       result.rank *= 1.5 if url_length == 0
+      result.clicks.times { result.rank *= 1.02 }
     end
 
     result_objects.sort_by! do |result|
@@ -70,6 +72,7 @@ class Webpage
       Webpage.new(title: result['title'],
                   url: result['url'],
                   description: result['description'],
+                  clicks: result['clicks'],
                   rank: result['rank'])
     end
 

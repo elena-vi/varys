@@ -141,6 +141,7 @@ DEPENDENCIES
   dm-ar-finders
   dm-postgres-adapter
   factory_girl
+  rack-test
   rest-client
   rspec
   sinatra

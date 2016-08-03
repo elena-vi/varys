@@ -15,9 +15,14 @@ Capybara.app = Varys
 RSpec.configure do |config|
   config.include Capybara::DSL
   config.include FactoryGirl::Syntax::Methods
+  config.include Rack::Test::Methods
 
   FactoryGirl.definition_file_paths = %w{./factories ./test/factories ./spec/factories}
   FactoryGirl.find_definitions
+
+  def app
+    Sinatra::Application
+  end
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

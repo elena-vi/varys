@@ -3,6 +3,7 @@ FactoryGirl.define do
     title 'Portsmouth News: The News'
     description 'news, sport, business, lifestyle and more,
                  from Portsmouth\'s newspaper, The News.'
-    url 'http://www.portsmouth.co.uk'
+    url 'http://www.portsmouth.co.uk/'
+    clicks 0
   end
 end
