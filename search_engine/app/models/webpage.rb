@@ -42,8 +42,9 @@ class Webpage
 
     begin
       connection = PG.connect :dbname => 'varys_' + ENV['RACK_ENV']
-      connection.exec "INSERT INTO webpages (title, description, url) VALUES('#{self.title}','#{self.description}','#{self.url}')"
+      connection.exec "INSERT INTO webpages (title, description, url) VALUES('#{self.title}','#{self.description}','#{self.url}');"
     rescue PG::Error => e
+      p "eh?"
       puts e.message
     ensure
       connection.close if connection

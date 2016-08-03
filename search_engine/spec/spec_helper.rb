@@ -19,21 +19,19 @@ RSpec.configure do |config|
   FactoryGirl.definition_file_paths = %w{./factories ./test/factories ./spec/factories}
   FactoryGirl.find_definitions
 
-  config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.before(:each) do
-    DatabaseCleaner.start
-  end
-
   config.before(:all) do
     FactoryGirl.reload
   end
 
   config.after(:each) do
-    DatabaseCleaner.clean
+    begin
+      connection = PG.connect :dbname => 'varys_' + ENV['RACK_ENV']
+      connection.exec "TRUNCATE webpages;"
+    rescue PG::Error => e
+      puts e.message
+    ensure
+      connection.close if connection
+    end
   end
 
   config.expect_with(:rspec) do |expectations|
