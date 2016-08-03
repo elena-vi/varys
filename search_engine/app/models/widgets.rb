@@ -2,43 +2,37 @@ require_relative 'result.rb'
 
 class Widgets
 
-  SOURCES = [ { name: 'tube',
+  SOURCES = [
+              { name: 'weather',
+                url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=a3d9eb01d4de82b9b8d0849ef604dbed",
+                before_condition: Proc.new { |query| query == 'weather' },
+                after_condition: Proc.new { |json| true },
+                parse_json: Proc.new { |json| {
+                  main: json["weather"][0]["main"],
+                  description: json["weather"][0]["description"],
+                  temperature: json["main"]["temp"]
+                }}
+              },
+              { name: 'tube',
                 url: "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status",
-                before_condition: Proc.new { |query|
-                  query == 'tube'
-                },
-                after_condition: Proc.new { |json|
-                  true
-                },
-                parse_json: Proc.new { |json|
-                  json.map do |line|
-                    { id: line["id"], name: line["name"], status: line["lineStatuses"][0]["statusSeverityDescription"], reason: line["lineStatuses"][0]["reason"] }
-                  end
-                }
+                before_condition: Proc.new { |query| query == 'tube' },
+                after_condition: Proc.new { |json| true },
+                parse_json: Proc.new { |json| json.map { |line| {
+                      id: line["id"],
+                      name: line["name"],
+                      status: line["lineStatuses"][0]["statusSeverityDescription"],
+                      reason: line["lineStatuses"][0]["reason"]
+                }}}
               },
               { name: 'wikipedia',
                 url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=%s&limit=1&namespace=0&format=json",
-                before_condition: Proc.new { |query|
-                  true
-                },
-                after_condition: Proc.new { |json|
-                  !json.first.description.empty? && !json.first.description.include?('may refer to')
-                },
-                parse_json: Proc.new { |json|
-                  [Result.new(title: json[1][0], url: json[3][0], description: json[2][0] || "")]
-                }
-              },
-              { name: 'weather',
-                url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=a3d9eb01d4de82b9b8d0849ef604dbed",
-                before_condition: Proc.new { |query|
-                  query == 'weather'
-                },
-                after_condition: Proc.new { |json|
-                  true
-                },
-                parse_json: Proc.new { |json|
-                  { main: json["weather"][0]["main"], description: json["weather"][0]["description"], temperature: json["main"]["temp"] }
-                }
+                before_condition: Proc.new { |query| query != 'weather' && query != 'tube'},
+                after_condition: Proc.new { |json| !json.first.description.empty? && !json.first.description.include?('may refer to') },
+                parse_json: Proc.new { |json| [Result.new(
+                  title: json[1][0],
+                  url: json[3][0],
+                  description: json[2][0] || "")
+                ]}
               }
             ]
 
