@@ -13,14 +13,55 @@ class Webpage
     results = self.find_by_sql("SELECT id, title, description, url, ts_rank_cd(textsearch, query) AS rank
                                 FROM webpages, plainto_tsquery('english', '#{query_string}') query, to_tsvector(url || title || description) textsearch
                                 WHERE query @@ textsearch
-                                ORDER BY rank DESC
-                                LIMIT 10 OFFSET #{query_from}")
+                                ORDER BY rank DESC")
+
+    # LIMIT 10 OFFSET #{query_from}
 
     # need to add function for checking if result is query homepage (if query string has no spaces)
     #
     # popularity table?
     #
     # loop through database again for both and adjust ranking accordingly
+
+    result_objects = convert_results_to_objects(results)
+
+    result_objects.each do |result|
+      url_length = get_extra_nodes(result.url).length
+      rank = result.rank.to_f
+      detriment = (url_length / 200.0)
+      increment = url_length == 0 ? 0.1 : 0
+      result.rank = (rank - detriment) + increment
+      result.save
+    end
+
+    result_objects.sort_by! do |result|
+      result.rank
+    end
+
+    result_objects.reverse
+  end
+
+  def self.get_extra_nodes(url)
+    site_nodes = url.split(/[\/]/)
+    url_parts = ["http:", "https:", ""]
+    site_nodes - url_parts - [get_root(url)]
+  end
+
+  def self.get_root(url)
+    site_nodes = url.split(/[\/]/)
+    site_nodes[2]
+  end
+
+  def self.get_homepage(site_root)
+    url_parts = ["www", "org", "uk", "gov", "com", "co"]
+    site_root.split('.') - url_parts
+  end
+
+  def self.get_all_results(query_string)
+    results = self.find_by_sql("SELECT id, title, description, url, ts_rank_cd(textsearch, query) AS rank
+                                FROM webpages, plainto_tsquery('english', '#{query_string}') query, to_tsvector(url || title || description) textsearch
+                                WHERE query @@ textsearch
+                                ORDER BY rank DESC")
 
     convert_results_to_objects(results)
   end

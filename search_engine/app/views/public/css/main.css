@@ -68,7 +68,7 @@ header input[type=submit]:hover {
 
 article {
   padding: 20px 0 0 20px;
-  margin: 0 0 0 100px;
+  margin: 0;
   max-width: 600px;
 }
 
@@ -76,6 +76,9 @@ article h2, h3, h4, h5 {
   margin: 0;
   font-weight: normal;
   line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 article h2 {
@@ -85,22 +88,17 @@ article h2 {
 article h2 a {
   display: block;
   width: 500px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 article h3 {
   font-size: 1em;
   color: #DC0073;
   width: 550px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 article h4 {
   font-size: 1em;
+  width: 550px;
 }
 
 article h5 {
@@ -128,13 +126,8 @@ input {
 }
 
 input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px white inset;
-    border: 0;
-}
-
-h1 {
-  font-size: 4em;
-  font-weight: lighter;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  border: 0;
 }
 
 .home {
@@ -151,21 +144,28 @@ h1 {
   text-align: center;
 }
 
+#landing h1 {
+  font-size: 4em;
+  font-weight: lighter;
+}
+
 #stats {
-  padding: 20px 0 20px 20px;
-  margin: 0 0 0 100px;
+  padding: 20px 0 0 20px;
   color: #91a498;
   font-size: 0.8em;
 }
 
-#results, #widgets {
+#results {
   float: left;
   max-width: 600px;
+  margin-left: 100px;
 }
 
 #widgets {
+  float: left;
   width: 350px;
-  margin: 20px 0 20px 120px;
+  padding: 20px;
+  margin: 20px 0 20px 100px;
 }
 
 #widget {
@@ -188,8 +188,9 @@ h1 {
 }
 
 #pages {
-  margin: 20px 0 0 120px;
-  text-align: center;
+  padding: 20px;
+  font-size: 0.8em;
+  margin-top: 20px;
 }
 
 .page {
@@ -198,9 +199,8 @@ h1 {
 
 .page a, .page_active a {
   padding: 7px;
-  font-size: 0.8em;
   border: 1px solid #007FFF;
-  margin: 0 7px 7px 0;
+  margin: 0 0 7px 7px;
 }
 
 .page_active a {

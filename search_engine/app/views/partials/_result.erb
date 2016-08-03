@@ -13,7 +13,7 @@
   </span>
   <span id="<%= r_css(result, :description) %>">
     <h4>
-      <%= output_result(result.description.strip[0...110], @query) %><%= ellipsis(result.description) %>
+      <%= output_result(result.description, @query) %>
     </h4>
   </span>
   <h5>

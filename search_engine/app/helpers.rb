@@ -39,8 +39,4 @@ module Helpers
     count != 1 ? word + 's' : word
   end
 
-  def ellipsis(field)
-    "..." if field.length >= 110
-  end
-
 end
