@@ -32,7 +32,7 @@ CREATE TABLE webpages (
 );
 
 
-ALTER TABLE webpages OWNER TO joestephens;
+ALTER TABLE webpages OWNER TO alexmellor;
 
 --
 -- Name: webpages_id_seq; Type: SEQUENCE; Schema: public; Owner: joestephens
@@ -46,24 +46,24 @@ CREATE SEQUENCE webpages_id_seq
     CACHE 1;
 
 
-ALTER TABLE webpages_id_seq OWNER TO joestephens;
+ALTER TABLE webpages_id_seq OWNER TO alexmellor;
 
 --
--- Name: webpages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: joestephens
+-- Name: webpages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: alexmellor
 --
 
 ALTER SEQUENCE webpages_id_seq OWNED BY webpages.id;
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: joestephens
+-- Name: id; Type: DEFAULT; Schema: public; Owner: alexmellor
 --
 
 ALTER TABLE ONLY webpages ALTER COLUMN id SET DEFAULT nextval('webpages_id_seq'::regclass);
 
 
 --
--- Data for Name: webpages; Type: TABLE DATA; Schema: public; Owner: joestephens
+-- Data for Name: webpages; Type: TABLE DATA; Schema: public; Owner: alexmellor
 --
 
 COPY webpages (id, title, description, url, rank) FROM stdin;
@@ -10247,7 +10247,7 @@ COPY webpages (id, title, description, url, rank) FROM stdin;
 
 
 --
--- Name: webpages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: joestephens
+-- Name: webpages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: alexmellor
 --
 
 SELECT pg_catalog.setval('webpages_id_seq', 21112, true);
@@ -10264,4 +10264,3 @@ ALTER TABLE ONLY webpages
 --
 -- PostgreSQL database dump complete
 --
-
