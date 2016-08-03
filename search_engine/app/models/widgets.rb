@@ -27,6 +27,18 @@ class Widgets
                 parse_json: Proc.new { |json|
                   [Result.new(title: json[1][0], url: json[3][0], description: json[2][0] || "")]
                 }
+              },
+              { name: 'weather',
+                url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=a3d9eb01d4de82b9b8d0849ef604dbed",
+                before_condition: Proc.new { |query|
+                  query == 'weather'
+                },
+                after_condition: Proc.new { |json|
+                  true
+                },
+                parse_json: Proc.new { |json|
+                  { main: json["weather"][0]["main"], description: json["weather"][0]["description"], temperature: json["main"]["temp"] }
+                }
               }
             ]
 
