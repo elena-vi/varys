@@ -5,7 +5,7 @@ class Webpage
   property :title, String, length: 255, required: true
   property :description, String, length: 255, required: true
   property :url, String, length: 255, required: true
-  property :rank, String
+  property :rank, Float
 
   def self.do_search(query_string, query_from)
     return [] if query_string == ""
@@ -27,11 +27,8 @@ class Webpage
 
     result_objects.each do |result|
       url_length = get_extra_nodes(result.url).length
-      rank = result.rank.to_f
-      detriment = (url_length / 200.0)
-      increment = url_length == 0 ? 0.1 : 0
-      result.rank = (rank - detriment) + increment
-      result.save
+      result.rank -= (result.rank * 0.25) * url_length
+      result.rank *= 1.5 if url_length == 0
     end
 
     result_objects.sort_by! do |result|
