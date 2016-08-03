@@ -5,7 +5,7 @@ class Widgets
   SOURCES = [ { name: 'tube',
                 url: "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status",
                 before_condition: Proc.new { |query|
-                  query.include?('tube')
+                  query == 'tube'
                 },
                 after_condition: Proc.new { |json|
                   true
