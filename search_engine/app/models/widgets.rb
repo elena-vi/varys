@@ -2,27 +2,25 @@ require_relative 'result.rb'
 
 class Widgets
 
-  SOURCES = { tube: {
-                  name: 'tube',
-                  url: "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status",
-                  condition: Proc.new { |query| query.include?('tube') }
-                },
-              wikipedia: {
-                  name: 'wikipedia',
-                  url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=%s&limit=1&namespace=0&format=json",
-                  condition: Proc.new { true }
-                }
-            }
+  SOURCES = [ {name: 'tube',
+               url: "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status",
+               condition: Proc.new { |query| query.include?('tube') }
+              },
+              {name: 'wikipedia',
+               url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=%s&limit=1&namespace=0&format=json",
+               condition: Proc.new { true }
+              }
+            ]
 
-  def self.all(query_string)
-    SOURCES.select{ |name, widget| widget[:condition].call(query_string) }.map do |name, widget|
-      [name, Widgets.new(name, query_string).get]
+  def self.all(query)
+    SOURCES.select{ |widget| widget[:condition].call(query) }.map do |widget|
+      [widget[:name].to_sym, Widgets.new(widget[:name].to_sym, widget[:url], query).get]
     end.to_h
   end
 
-  def initialize(widget, query_string)
+  def initialize(widget, url, query)
     @widget = widget
-    @url = SOURCES[widget][:url] % query_string
+    @url = url % query
   end
 
   def get
