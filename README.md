@@ -28,4 +28,5 @@ _We wanted to find out!_
 
 ## Tests
 To run python tests run ```$ nosetests``` from varys/varys folder
+
 To run ruby test run ```$ rspec``` from varys/search_engine folder
