@@ -1,7 +1,6 @@
 class Varys < Sinatra::Base
   get '/widgets' do
-    @query = params[:q]
-    @widgets = Widgets.do_widget_search(@query)
+    @widgets = Widgets.all(params[:q])
     erb :'widgets/index'
   end
 end
