@@ -80,53 +80,51 @@ feature 'Results page' do
       expect(page).to have_content('2 results')
     end
   end
-  #
-  # context 'dealing with pages' do
-  #
-  #   let(:results) { [] }
-  #
-  #   before do
-  #     15.times do
-  #       results << FactoryGirl.create(:webpage)
-  #     end
-  #   end
-  #
-  #   scenario 'it only shows 10 results on first page' do
-  #     visit '/results?q=portsmouth+news'
-  #
-  #     id = 0
-  #
-  #     10.times do |i|
-  #       id = results.first.id + i
-  #       expect(page).to have_css("article#result_#{id}")
-  #     end
-  #
-  #     expect(page).not_to have_css("article#result_#{id + 1}")
-  #   end
-  #
-  #   scenario 'it displays more results on page two' do
-  #     visit '/results?q=portsmouth+news&start=10'
-  #
-  #     id = 0
-  #
-  #     5.times do |i|
-  #       id = results.first.id + i + 10
-  #       expect(page).to have_css("article#result_#{id}")
-  #     end
-  #
-  #     expect(page).not_to have_css("article#result_#{id + 1}")
-  #   end
-  #
-  #   scenario 'it links to the next 10 results' do
-  #     visit '/results?q=portsmouth+news'
-  #
-  #     within 'div#pages' do
-  #       click_link '2'
-  #     end
-  #
-  #     expect(current_path).to eq '/results'
-  #     expect(page).to have_css("article#result_#{results.last.id}")
-  #     expect(page).not_to have_css("article#result_#{results.first.id}")
-  #   end
-  # end
+
+  context 'dealing with pages' do
+
+    let(:results) { [] }
+
+    before do
+      15.times { results << FactoryGirl.create(:webpage) }
+    end
+
+    scenario 'it only shows 10 results on first page' do
+      visit '/results?q=portsmouth+news'
+
+      id = 0
+
+      10.times do |i|
+        id = results.first.id + i
+        expect(page).to have_css("article#result_#{id}")
+      end
+
+      expect(page).not_to have_css("article#result_#{id + 1}")
+    end
+
+    scenario 'it displays more results on page two' do
+      visit '/results?q=portsmouth+news&start=10'
+
+      id = 0
+
+      5.times do |i|
+        id = results.first.id + i + 10
+        expect(page).to have_css("article#result_#{id}")
+      end
+
+      expect(page).not_to have_css("article#result_#{id + 1}")
+    end
+
+    scenario 'it links to the next 10 results' do
+      visit '/results?q=portsmouth+news'
+
+      within 'div#pages' do
+      click_link '2'
+      end
+
+      expect(current_path).to eq '/results'
+      expect(page).to have_css("article#result_#{results.last.id}")
+      expect(page).not_to have_css("article#result_#{results.first.id}")
+    end
+  end
 end

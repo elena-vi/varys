@@ -73,7 +73,7 @@ class Webpage
       result.rank
     end
 
-    result_objects.reverse
+    result_objects.reverse[query_from, query_from+10]
   end
 
   def self.get_extra_nodes(url)

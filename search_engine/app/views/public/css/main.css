@@ -191,7 +191,6 @@ input:-webkit-autofill {
 #pages {
   padding: 20px;
   font-size: 0.8em;
-  margin-top: 20px;
 }
 
 .page {
@@ -201,7 +200,7 @@ input:-webkit-autofill {
 .page a, .page_active a {
   padding: 7px;
   border: 1px solid #007FFF;
-  margin: 0 0 7px 7px;
+  margin: 0 7px 7px 0;
 }
 
 .page_active a {
