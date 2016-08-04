@@ -1,7 +1,5 @@
 class Webpage
 
-  require 'pg'
-
   attr_reader :title, :description, :url
   attr_accessor :id, :rank
 
@@ -16,25 +14,7 @@ class Webpage
   def self.do_search(query_string, query_from)
     return [] if query_string == ""
 
-    begin
-      connection = PG.connect :dbname => 'varys_' + ENV['RACK_ENV']
-      results = connection.exec "SELECT DISTINCT id, title, description, url, ts_rank_cd(textsearch, query) AS rank
-      FROM webpages, plainto_tsquery('english', '#{query_string}') query, to_tsvector(url || title || description) textsearch
-      WHERE query @@ textsearch
-      ORDER BY rank DESC"
-      # LIMIT 10 OFFSET #{query_from}
-    rescue PG::Error => e
-      puts e.message
-      results = []
-    ensure
-      connection.close if connection
-    end
-
-    # need to add function for checking if result is query homepage (if query string has no spaces)
-    #
-    # popularity table?
-    #
-    # loop through database again for both and adjust ranking accordingly
+    results = Database.search(query_string)
 
     result_objects = convert_results_to_objects(results)
 
@@ -68,36 +48,13 @@ class Webpage
   end
 
   def self.get_all_results(query_string)
-
-    begin
-      connection = PG.connect :dbname => 'varys_' + ENV['RACK_ENV']
-      results = connection.exec "SELECT DISTINCT id, title, description, url, ts_rank_cd(textsearch, query) AS rank
-      FROM webpages, plainto_tsquery('english', '#{query_string}') query, to_tsvector(url || title || description) textsearch
-      WHERE query @@ textsearch
-      ORDER BY rank DESC"
-      # LIMIT 10 OFFSET #{query_from}
-    rescue PG::Error => e
-      puts e.message
-      results = []
-    ensure
-      connection.close if connection
-    end
-
+    results = Database.search(query_string)
     convert_results_to_objects(results)
   end
 
   def save!
-
-    begin
-      connection = PG.connect :dbname => 'varys_' + ENV['RACK_ENV']
-      connection.exec "INSERT INTO webpages (title, description, url) VALUES('#{self.title}','#{self.description}','#{self.url}');"
-      id = connection.exec "SELECT id FROM webpages WHERE title = '#{self.title}'"
-    rescue PG::Error => e
-      puts e.message
-    ensure
-      connection.close if connection
-    end
-    self.id = id.values.last[0].to_i
+    Database.insert_webpage(self.title, self.description, self.url)
+    self.id = Database.get_id(self.title, self.description, self.url)
   end
 
   private
