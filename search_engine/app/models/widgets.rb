@@ -1,13 +1,34 @@
 require_relative 'result.rb'
 
+#class WeatherConfig
+#
+#  def initialize
+#    @name = 
+#    @url
+#  end
+#
+#  def before_condition(widg)
+#    
+#  end
+#
+#  def after_condition(widg)
+#
+#  end
+#
+#  def parse_json(json)
+#
+#  end
+#end
+
+
 class Widgets
 
   SOURCES = [
               { name: 'weather',
                 url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=a3d9eb01d4de82b9b8d0849ef604dbed",
-                before_condition: Proc.new { |query| query == 'weather' },
-                after_condition: Proc.new { |json| true },
-                parse_json: Proc.new { |json| {
+                before_condition: -> (widg) { widg.query == 'weather' },
+                after_condition: -> (widg) { |widg| true },
+                parse_json: -> (json) { {
                   main: json["weather"][0]["main"],
                   description: json["weather"][0]["description"],
                   temperature: json["main"]["temp"]
@@ -15,20 +36,23 @@ class Widgets
               },
               { name: 'tube',
                 url: "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status",
-                before_condition: Proc.new { |query| query == 'tube' },
-                after_condition: Proc.new { |json| true },
-                parse_json: Proc.new { |json| json.map { |line| {
-                      id: line["id"],
+                before_condition: -> (widg) { widg.query == 'tube' },
+                after_condition: -> (widg) { true },
+                parse_json: -> (json) { 
+                  json.map { |line| 
+                    { id: line["id"],
                       name: line["name"],
                       status: line["lineStatuses"][0]["statusSeverityDescription"],
                       reason: line["lineStatuses"][0]["reason"]
-                }}}
+                    }
+                  }
+                }
               },
               { name: 'wikipedia',
                 url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=%s&limit=1&namespace=0&format=json",
-                before_condition: Proc.new { |query| query != 'weather' && query != 'tube'},
-                after_condition: Proc.new { |json| !json.first.description.empty? && !json.first.description.include?('may refer to') },
-                parse_json: Proc.new { |json| [Result.new(
+                before_condition: -> (widg) { widg.query != 'weather' && widg.query != 'tube'},
+                after_condition: -> (widg) { !widg.json.first.description.empty? && !widg.json.first.description.include?('may refer to') },
+                parse_json: -> (json) { [Result.new(
                   title: json[1][0],
                   url: json[3][0],
                   description: json[2][0] || "")
@@ -40,6 +64,8 @@ class Widgets
     SOURCES.map { |widget| [widget[:name].to_sym, Widgets.new(widget, query).get] }.to_h.delete_if{ |k,v| !v }
   end
 
+  attr_reader :name, :url, :query, :json
+  
   def initialize(widget, query)
     @name = widget[:name]
     @url = widget[:url] % query
@@ -50,10 +76,10 @@ class Widgets
   end
 
   def get
-    return nil unless @before_condition.call(@query)
+    return nil unless @before_condition.call(self)
     response = RestClient::Request.execute(:url => @url, :method => :get, :verify_ssl => false)
-    json = @parse_json.call(JSON.parse(response))
-    return nil unless @after_condition.call(json)
+    @json = @parse_json.call(JSON.parse(response))
+    return nil unless @after_condition.call(self)
     json
   end
 end
