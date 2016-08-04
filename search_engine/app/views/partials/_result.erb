@@ -1,7 +1,7 @@
 <article id="<%= r_css(result) %>">
   <span id="<%= r_css(result, :title) %>">
     <h2>
-      <a href="<%= result.url %>">
+      <a href="/url?w=<%= result.id %>">
         <%= output_result(result.title, @query) %>
       </a>
     </h2>
