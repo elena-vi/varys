@@ -1,33 +1,12 @@
 require_relative 'result.rb'
 
-#class WeatherConfig
-#
-#  def initialize
-#    @name = 
-#    @url
-#  end
-#
-#  def before_condition(widg)
-#    
-#  end
-#
-#  def after_condition(widg)
-#
-#  end
-#
-#  def parse_json(json)
-#
-#  end
-#end
-
-
 class Widgets
 
   SOURCES = [
               { name: 'weather',
                 url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=a3d9eb01d4de82b9b8d0849ef604dbed",
                 before_condition: -> (widg) { widg.query == 'weather' },
-                after_condition: -> (widg) { |widg| true },
+                after_condition: -> (widg) { true },
                 parse_json: -> (json) { {
                   main: json["weather"][0]["main"],
                   description: json["weather"][0]["description"],
@@ -76,10 +55,10 @@ class Widgets
   end
 
   def get
-    return nil unless @before_condition.call(self)
+    return nil unless @before_condition.(self)
     response = RestClient::Request.execute(:url => @url, :method => :get, :verify_ssl => false)
-    @json = @parse_json.call(JSON.parse(response))
-    return nil unless @after_condition.call(self)
+    @json = @parse_json.(JSON.parse(response))
+    return nil unless @after_condition.(self)
     json
   end
 end
