@@ -2,8 +2,8 @@ class Webpage
 
   require 'pg'
 
-  attr_reader :title, :description, :url, :rank
-  attr_accessor :id
+  attr_reader :title, :description, :url
+  attr_accessor :id, :rank
 
   def initialize(params)
     @id = params.fetch(:id, '')
@@ -39,6 +39,7 @@ class Webpage
     result_objects = convert_results_to_objects(results)
 
     result_objects.each do |result|
+      result.rank = result.rank.to_i
       url_length = get_extra_nodes(result.url).length
       result.rank -= (result.rank * 0.25) * url_length
       result.rank *= 1.5 if url_length == 0
