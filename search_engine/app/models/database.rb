@@ -1,6 +1,6 @@
 class Database
-  
-  require 'pg'
+
+	require 'pg'
 
 	attr_reader :connection
 	def self.search(query_string)
@@ -20,10 +20,10 @@ class Database
 		results
 	end
 
-	def self.insert_webpage(title, description, url)
+	def self.insert_webpage(title, description, url, clicks)
 		begin
 			connection = open_connection
-			connection.exec "INSERT INTO webpages (title, description, url) VALUES('#{title}','#{description}','#{url}');"
+			connection.exec "INSERT INTO webpages (title, description, url, clicks) VALUES('#{title}','#{description}','#{url}', '#{clicks}');"
 		rescue PG::Error => e
 			puts e.message
 		ensure
@@ -42,6 +42,20 @@ class Database
 		end
 		id.values.last[0].to_i
 	end
+
+	def self.get_by_id(id)
+		begin
+			connection = open_connection
+			result = connection.exec "SELECT id, title, description, url, clicks FROM webpages WHERE id=#{id}"
+		rescue PG::Error => e
+			puts e.message
+			result = []
+		ensure
+			connection.close if connection
+		end
+		result
+	end
+
 
 	private
 
