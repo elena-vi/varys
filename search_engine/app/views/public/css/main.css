@@ -186,6 +186,7 @@ input:-webkit-autofill {
 
 #widget_body {
   padding: 20px;
+  text-align: center;
 }
 
 #pages {
