@@ -6,11 +6,11 @@ class Webpage
   attr_accessor :id, :rank
 
   def initialize(params)
-    @id = params.fetch(:id, '')
+    @id = params.fetch(:id, 0)
     @title = params.fetch(:title, "")
     @url = params.fetch(:url, "")
     @description = params.fetch(:description, "")
-    @rank = params.fetch(:rank, "")
+    @rank = params.fetch(:rank, 0)
   end
 
   def self.do_search(query_string, query_from)
@@ -39,7 +39,6 @@ class Webpage
     result_objects = convert_results_to_objects(results)
 
     result_objects.each do |result|
-      result.rank = result.rank.to_i
       url_length = get_extra_nodes(result.url).length
       result.rank -= (result.rank * 0.25) * url_length
       result.rank *= 1.5 if url_length == 0
@@ -106,11 +105,11 @@ class Webpage
   def self.convert_results_to_objects(query_results)
     results = []
     query_results.map do |result|
-      results << Webpage.new( id: result['id'],
+      results << Webpage.new( id: result['id'].to_i,
       title: result['title'],
       url: result['url'],
       description: result['description'],
-      rank: result['rank']
+      rank: result['rank'].to_f
       )
     end
     results
