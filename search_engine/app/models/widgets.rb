@@ -3,7 +3,7 @@ require_relative 'result.rb'
 class Widgets
 
   SOURCES = [
-              { name: 'weather',
+              { name: :weather,
                 url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=a3d9eb01d4de82b9b8d0849ef604dbed",
                 before_condition: -> (widg) { widg.query == 'weather' },
                 after_condition: -> (widg) { true },
@@ -13,7 +13,7 @@ class Widgets
                   temperature: json["main"]["temp"]
                 }}
               },
-              { name: 'tube',
+              { name: :tube,
                 url: "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status",
                 before_condition: -> (widg) { widg.query == 'tube' },
                 after_condition: -> (widg) { true },
@@ -27,9 +27,9 @@ class Widgets
                   }
                 }
               },
-              { name: 'wikipedia',
+              { name: :wikipedia,
                 url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=%s&limit=1&namespace=0&format=json",
-                before_condition: -> (widg) { widg.query != 'weather' && widg.query != 'tube'},
+                before_condition: -> (widg) { widg.query != 'weather' },
                 after_condition: -> (widg) { !widg.json.first.description.empty? && !widg.json.first.description.include?('may refer to') },
                 parse_json: -> (json) { [Result.new(
                   title: json[1][0],
@@ -40,25 +40,30 @@ class Widgets
             ]
 
   def self.all(query)
-    SOURCES.map { |source| [source[:name].to_sym, Widgets.new(source, query).get] }.to_h.delete_if{ |k,v| !v }
+    SOURCES.map { |source| Widgets.new(source, query).populate }.compact
   end
 
   attr_reader :name, :url, :query, :json
   
-  def initialize(widget, query)
-    @name = widget[:name]
-    @url = widget[:url] % query
+  def initialize(source, query)
+    @name = source[:name]
+    @url = source[:url] % query
     @query = query
-    @before_condition = widget[:before_condition]
-    @after_condition = widget[:after_condition]
-    @parse_json = widget[:parse_json]
+    @before_condition = source[:before_condition]
+    @after_condition = source[:after_condition]
+    @parse_json = source[:parse_json]
   end
 
-  def get
+  def populate
     return nil unless @before_condition.(self)
-    response = RestClient::Request.execute(:url => @url, :method => :get, :verify_ssl => false)
-    @json = @parse_json.(JSON.parse(response))
+    @json = @parse_json.(fetch_json)
     return nil unless @after_condition.(self)
-    json
+    self
   end
+
+  def fetch_json
+    response = RestClient::Request.execute(:url => @url, :method => :get, :verify_ssl => false)
+    JSON.parse(response)
+  end
+
 end

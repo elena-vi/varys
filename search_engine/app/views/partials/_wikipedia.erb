@@ -1,10 +1,8 @@
-<% if wikipedia && !wikipedia.empty? %>
-  <div id='widget'>
-    <div id='widget_header'>
-      <h2> <%= wikipedia.first.title %> </h2>
-    </div>
-    <div id='widget_body'>
-      <%= wikipedia.first.description %> <a href="<%= wikipedia.first.url %>">Wikipedia</a>
-    </div>
+<div id='widget'>
+  <div id='widget_header'>
+    <h2> <%= wikipedia.first.title %> </h2>
   </div>
-<% end %>
+  <div id='widget_body'>
+    <%= wikipedia.first.description %> <a href="<%= wikipedia.first.url %>">Wikipedia</a>
+  </div>
+</div>
