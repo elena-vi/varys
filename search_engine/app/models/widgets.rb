@@ -33,12 +33,13 @@ class Widgets
               { name: :wikipedia,
                 url: "https://en.wikipedia.org/w/api.php?action=opensearch&search=%s&limit=1&namespace=0&format=json",
                 before_condition: -> (widg) { widg.query != 'weather' },
-                after_condition: -> (widg) { !widg.json.first.description.empty? && !widg.json.first.description.include?('may refer to') },
-                parse_json: -> (json) { [Result.new(
-                  title: json[1][0],
-                  url: json[3][0],
-                  description: json[2][0] || "")
-                ]}
+                after_condition: -> (widg) { !widg.json[:description].empty? && !widg.json[:description].include?('may refer to') },
+                parse_json: -> (json) {
+                  { title: json[1][0],
+                    url: json[3][0],
+                    description: json[2][0] || ""
+                  }
+                }
               }
             ]
 
