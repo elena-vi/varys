@@ -1,15 +1,26 @@
 class WidgetBuilder
+
   require_relative 'widgets/widget'
-  require_relative 'widgets/wikipedia_widget'
-  require_relative 'widgets/tube_widget'
-  require_relative 'widgets/weather_widget'
 
-
-  SOURCES = [WeatherWidget, TubeWidget, WikipediaWidget]
+  CLASS_NAMES = ['WeatherWidget', 'TubeWidget', 'WikipediaWidget']
+  WIDGETS_PATH = "widgets/%s"
 
   def self.all(query)
-    SOURCES.map do |source_class|
-      source_class.new(query).populate
+    CLASS_NAMES.map do |klass|
+      require_relative widget_path(klass)
+      eval(klass).new(query).populate
     end.compact
   end
+
+  private
+ 
+  def self.widget_path(klass)
+    file_name = klass.gsub(/::/, '/').
+      gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+      gsub(/([a-z\d])([A-Z])/,'\1_\2').
+      tr("-", "_").
+      downcase
+    WIDGETS_PATH % file_name
+  end
+
 end
