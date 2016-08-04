@@ -23,5 +23,12 @@ feature 'widgets' do
       expect(page).to have_css("div#widget")
       expect(page).to have_content('Piccadilly')
     end
+
+    scenario 'shows weather service if "weather" entered into search bar' do
+      visit '/widgets?q=weather'
+
+      expect(page).to have_css("div#widget")
+      expect(page).to have_content('Weather Service')
+    end
   end
 end

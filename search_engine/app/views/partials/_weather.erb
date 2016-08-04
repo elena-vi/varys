@@ -1,0 +1,12 @@
+<div id='widget'>
+  <div id='widget_header'>
+    <h2>Weather Service</h2>
+  </div>
+  <div id='widget_body'>
+    <div id="weather_location"><%= weather[:location] %></div>
+    <div id="weather_image"><img src="http://openweathermap.org/img/w/<%= weather[:icon] %>.png" /></div>
+    <div id="weather_current_weather"><%= weather[:main] %></div>
+    <div id="weather_detailed_weather"><%= weather[:description] %></div>
+    <div id="weather_temperature"><%= k_to_c(weather[:temperature]) %></div>
+  </div>
+</div>

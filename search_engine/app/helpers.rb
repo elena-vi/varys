@@ -40,4 +40,7 @@ module Helpers
     count != 1 ? word + 's' : word
   end
 
+  def k_to_c(kelvin)
+    "#{(kelvin - 273.15).round(1)} &#176;C"
+  end
 end
