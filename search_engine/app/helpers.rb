@@ -10,25 +10,24 @@ module Helpers
     words.empty? ? string : boldify_string(string, words)
   end
 
-  # da faq is this?
   def r_css(row, field=nil)
     underscore = field.nil? ? "" : "_"
     "result_#{row.id}#{underscore}#{field.to_s}"
   end
 
-  def get_pages_wrapper(query, start_point)
-    pages_array = [1]
-    get_pages(query, pages_array, start_point)
-  end
+  def get_pages(result_count, current_start)
+    number_of_pages = result_count / 10
+    pages_array = []
+    (1..number_of_pages).each { |i| pages_array << i }
+    pages_array << (number_of_pages + 1) if result_count % 10 != 0
 
-  def get_pages(query, pages_array, start_point)
-    sp = (start_point.to_i + 10)
+    current_page = (current_start / 10)
 
-    if Webpage.do_search(query, sp).length > 0
-      pages_array << (pages_array.last + 1)
-      get_pages(query, pages_array, sp)
+    if current_page < 4
+      return pages_array[0, 10]
     else
-      return pages_array
+      # page is 8 so show 9 to 17
+      return pages_array[current_page-1, current_page+6]
     end
   end
 
