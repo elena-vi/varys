@@ -9,7 +9,7 @@ feature 'Url redirects' do
     end
 
     scenario 'it adds 1 click to the webpage\'s clicks column' do
-      expect(Webpage.get_by_id(webpage.id).clicks).to eq 1
+      expect(Webpage.get_webpage(webpage.id).clicks).to eq 1
     end
 
     scenario 'it redirects to the webpage' do

@@ -1,6 +1,7 @@
 class Webpage
-  attr_reader :title, :description, :url, :clicks
-  attr_accessor :id, :rank
+
+  attr_reader :title, :description, :url
+  attr_accessor :id, :rank, :clicks
 
   def initialize(params)
     @id = params.fetch(:id, 0)
@@ -11,24 +12,14 @@ class Webpage
     @clicks = params.fetch(:clicks, 0)
   end
 
-  def self.get_by_id(id)
-    begin
-      connection = PG.connect :dbname => 'varys_' + ENV['RACK_ENV']
-      results = connection.exec "SELECT * FROM webpages WHERE id=#{id}"
-    rescue PG::Error => e
-      puts e.message
-      results = []
-    ensure
-      connection.close if connection
-    end
-
-    result_objects = convert_results_to_objects(results)
-
-    result = result_objects.first
+  def self.get_webpage(id)
+    result = Database.get_by_id(id)
+    result_object = convert_results_to_objects(result)
+    result_object.first
   end
 
   def self.add_click(id)
-    result = get_by_id(id)
+    result = get_webpage(id)
     clicks = result.clicks + 1
 
     begin
@@ -47,18 +38,7 @@ class Webpage
   def self.do_search(query_string, query_from)
     return [] if query_string == ""
 
-    begin
-      connection = PG.connect :dbname => 'varys_' + ENV['RACK_ENV']
-      results = connection.exec "SELECT DISTINCT id, title, description, url, ts_rank_cd(textsearch, query) AS rank
-      FROM webpages, plainto_tsquery('english', '#{query_string}') query, to_tsvector(url || title || description) textsearch
-      WHERE query @@ textsearch
-      ORDER BY rank DESC"
-    rescue PG::Error => e
-      puts e.message
-      results = []
-    ensure
-      connection.close if connection
-    end
+    results = Database.search(query_string)
 
     result_objects = convert_results_to_objects(results)
 
@@ -93,33 +73,13 @@ class Webpage
   end
 
   def self.get_all_results(query_string)
-    begin
-      connection = PG.connect :dbname => 'varys_' + ENV['RACK_ENV']
-      results = connection.exec "SELECT DISTINCT id, title, description, url, ts_rank_cd(textsearch, query) AS rank
-      FROM webpages, plainto_tsquery('english', '#{query_string}') query, to_tsvector(url || title || description) textsearch
-      WHERE query @@ textsearch
-      ORDER BY rank DESC"
-    rescue PG::Error => e
-      puts e.message
-      results = []
-    ensure
-      connection.close if connection
-    end
-
+    results = Database.search(query_string)
     convert_results_to_objects(results)
   end
 
   def save!
-    begin
-      connection = PG.connect :dbname => 'varys_' + ENV['RACK_ENV']
-      connection.exec "INSERT INTO webpages (title, description, url, clicks) VALUES('#{self.title}','#{self.description}','#{self.url}', '#{self.clicks}');"
-      id = connection.exec "SELECT id FROM webpages WHERE title = '#{self.title}'"
-    rescue PG::Error => e
-      puts e.message
-    ensure
-      connection.close if connection
-    end
-    self.id = id.values.last[0].to_i
+    Database.insert_webpage(self.title, self.description, self.url, self.clicks)
+    self.id = Database.get_id(self.title, self.description, self.url)
   end
 
   private
