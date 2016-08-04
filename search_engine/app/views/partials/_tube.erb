@@ -1,18 +1,16 @@
-<% if tube %>
-	<div id='widget'>
-		<div id='widget_header'>
-			<h2>Current Line Status</h2>
-		</div>
-			<ol id="tube">
-			<% tube.each do |line| %>
-				<li id="<%= line[:id] %>" data-name="">
-					<span class="name"><%= line[:name] %></span>
-					<span class="status"><%= line[:status] %></span>
-					<% if line[:reason] %>
-						<span class="reason"><%= line[:reason] %></span>
-					<% end %>
-				</li>
-			<% end %>
-			</ol>
-	</div>
-<% end %>
+<div id='widget'>
+  <div id='widget_header'>
+    <h2>Current Line Status</h2>
+  </div>
+    <ol id="tube">
+    <% tube.each do |line| %>
+      <li id="<%= line[:id] %>" data-name="">
+        <span class="name"><%= line[:name] %></span>
+        <span class="status"><%= line[:status] %></span>
+        <% if line[:reason] %>
+          <span class="reason"><%= line[:reason] %></span>
+        <% end %>
+      </li>
+    <% end %>
+    </ol>
+</div>
