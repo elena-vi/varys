@@ -7,18 +7,21 @@ class Widgets
                 url: "http://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=a3d9eb01d4de82b9b8d0849ef604dbed",
                 before_condition: -> (widg) { widg.query == 'weather' },
                 after_condition: -> (widg) { true },
-                parse_json: -> (json) { {
-                  main: json["weather"][0]["main"],
-                  description: json["weather"][0]["description"],
-                  temperature: json["main"]["temp"]
-                }}
+                parse_json: -> (json) {
+                  { main: json["weather"][0]["main"],
+                    description: json["weather"][0]["description"],
+                    temperature: json["main"]["temp"],
+                    location: json["name"],
+                    icon: json["weather"][0]["icon"]
+                  }
+                }
               },
               { name: :tube,
                 url: "https://api.tfl.gov.uk/line/mode/tube,overground,dlr,tflrail/status",
                 before_condition: -> (widg) { widg.query == 'tube' },
                 after_condition: -> (widg) { true },
-                parse_json: -> (json) { 
-                  json.map { |line| 
+                parse_json: -> (json) {
+                  json.map { |line|
                     { id: line["id"],
                       name: line["name"],
                       status: line["lineStatuses"][0]["statusSeverityDescription"],
@@ -44,7 +47,7 @@ class Widgets
   end
 
   attr_reader :name, :url, :query, :json
-  
+
   def initialize(source, query)
     @name = source[:name]
     @url = source[:url] % query
