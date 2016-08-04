@@ -40,7 +40,7 @@ class Widgets
             ]
 
   def self.all(query)
-    SOURCES.map { |widget| [widget[:name].to_sym, Widgets.new(widget, query).get] }.to_h.delete_if{ |k,v| !v }
+    SOURCES.map { |source| [source[:name].to_sym, Widgets.new(source, query).get] }.to_h.delete_if{ |k,v| !v }
   end
 
   attr_reader :name, :url, :query, :json
