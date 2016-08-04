@@ -10,6 +10,7 @@ module Helpers
     words.empty? ? string : boldify_string(string, words)
   end
 
+  # da faq is this?
   def r_css(row, field=nil)
     underscore = field.nil? ? "" : "_"
     "result_#{row.id}#{underscore}#{field.to_s}"

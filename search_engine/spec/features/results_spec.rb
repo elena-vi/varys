@@ -1,7 +1,6 @@
 feature 'Results page' do
 
   context 'user enters a search query' do
-
     let!(:result) { FactoryGirl.create(:webpage) }
 
     scenario 'displays no results if query string empty' do
@@ -47,6 +46,7 @@ feature 'Results page' do
     end
 
     scenario 'it highlights query string matches' do
+
       visit '/results?q=portsmouth+news'
 
       id = result.id
