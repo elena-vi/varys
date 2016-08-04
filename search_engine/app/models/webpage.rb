@@ -2,10 +2,11 @@ class Webpage
 
   require 'pg'
 
-  attr_reader :id, :title, :description, :url, :rank
+  attr_reader :title, :description, :url, :rank
+  attr_accessor :id
 
   def initialize(params)
-    @id = params.fetch(:id, "")
+    @id = params.fetch(:id, '')
     @title = params.fetch(:title, "")
     @url = params.fetch(:url, "")
     @description = params.fetch(:description, "")
@@ -43,13 +44,13 @@ class Webpage
     begin
       connection = PG.connect :dbname => 'varys_' + ENV['RACK_ENV']
       connection.exec "INSERT INTO webpages (title, description, url) VALUES('#{self.title}','#{self.description}','#{self.url}');"
+      id = connection.exec "SELECT id FROM webpages WHERE title = '#{self.title}'"
     rescue PG::Error => e
-      p "eh?"
       puts e.message
     ensure
       connection.close if connection
     end
-
+    self.id = id.values.last[0].to_i
   end
 
   private
