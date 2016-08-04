@@ -1,38 +1,31 @@
-# varys
+# VARYS
 A search engine
 
+## Features
+- Searching!!
+- Helpful widgets:
+  - Tube Statues
+  - Wikipedia info pages
+  - Live weather
+  
+## Fun facts
+- Custom Object-relational mapping
+- Own data scrapping
+
+## Inspiration
+Everyone uses Goole, but who knows how it actually works?
+_We wanted to find out!_
+
+## Technologies used
+- Python
+- Scrapy
+- Unit test
+- Ruby 
+- Sinatra 
+- RSpec / Capybara
+- Postgres
+- jQuery
+
 ## Tests
-To run tests run 'nosetests' from inside the project folder
-
-## Timeline 
-
-### Week 1 
-  - Monday: 
-    -  Python tutorials 
-    -  Search engine theory
-  - Tuesday: 
-    - 9:30 stand up _(replan)_   
-    - Spike everything!
-  - Wednesday:
-    - TDD begins!
-    - Databases
-  - Thursday:
-    - Ranking 
-  - Friday:
-    - Crawling and processing 
-    - Retro at 5
-  - Weekend?
-    - **What weekend?!**
-    - Web interface
-  
-### Week 2 
-  - Monday:
-  - Tuesday:
-  - Wednesday:
-    - PM ***Feature freeze***
-  - Thursday:
-  - Friday:
-    - Presentation + Graduation
-  - Weekend?
-    - *The party continues*
-  
+To run python tests run ```$ nosetests``` from varys/varys folder
+To run ruby test run ```$ rspec``` from varys/search_engine folder
