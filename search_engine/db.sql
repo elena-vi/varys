@@ -455,7 +455,6 @@ COPY webpages (id, title, description, url, rank, clicks) FROM stdin;
 21115	Dog Health Center	Welcome to the new WebMD Dog Health Center. WebMD veterinary experts provide comprehensive information about dog health care, offer nutrition and feeding tips, and help you identify illnesses in dogs.	http://pets.webmd.com/dogs/	\N	1
 21116	London's Biggest Dog Show: Discover Dogs | Meet +200 Breeds of Dog	Meet hundreds of dogs, chat to owners, great shopping and watch world-class displays in competitions. A great day out for the whole family – and under 12s go FREE	http://www.discoverdogs.org.uk/	\N	0
 21118	The Home for Dog Owners and Those Working with Dogs: The Kennel Club	The UK’s largest organisation dedicated to the welfare of dogs. We offer owners and breeders information and advice on dog health, training, activities and breeding	http://www.thekennelclub.org.uk/	\N	0
-21119	What is your dog?	what-dog classifies the breed of your dog using machine learning. See our companion Fetch! app in the iOS app store!	https://www.hearingdogs.org.uk/	\N	0
 21120	Guide Dogs UK Charity for the Blind and Partially Sighted	The UK's largest and oldest guide dog assocciation. Includes social events, national raffle and news.	http://www.guidedogs.org.uk/	\N	0
 21121	Best Dog Breeds - Pictures, Information, and Reviews	Find the right dog or puppy for you by comparing pictures, size, personality, and reviews. Learn about its health, costs of ownership, shedding, and more.	http://dogs.petbreeds.com/	\N	0
 21122	International Guide Dog Federation Home Page	The home of the International Guide Dog Federation website with information regarding their members and servics worldwide.	http://www.igdf.org.uk/	\N	0
@@ -465,6 +464,7 @@ COPY webpages (id, title, description, url, rank, clicks) FROM stdin;
 21114	How to Build a Dog - Pictures, More From National Geographic Magazine	Scientists have found the secret recipe behind the spectacular variety of dog shapes and sizes, and it could help unravel the complexity of human genetic disease.	http://ngm.nationalgeographic.com/2012/02/build-a-dog/ratliff-text	\N	0
 21126	The NHGRI Dog Genome Project	Welcome to the Dog Genome Project at the National Human Genome Research Institute (formerly at the Fred Hutchinson Cancer Research Center).	https://research.nhgri.nih.gov/dog_genome/	\N	0
 21130	Tube Map of Affordability | Shelter	Shelter's London Tube Map of Affordability shows how unaffordable renting in the city has now become, and why the new London Mayor must fix it.	http://england.shelter.org.uk/support_us/campaigns/tube_map_affordability	\N	0
+21119	What is your dog?	what-dog classifies the breed of your dog using machine learning. See our companion Fetch! app in the iOS app store!	https://www.what-dog.net/	\N	2
 21131	Revealed: London's dirtiest Tube lines and Underground stations | Transport | News | London Evening Standard	London's dirtiest Tube lines have been revealed - with the Northern line coming out as the filthiest of them all. More than 1.34 billion passengers ride the London Underground every year, and researchers from online doctor firm Dr Ed wanted to test what bacteria they were leaving behind. The researchers swabbed 60 surfaces on the capital's 10 busiest tube lines and sent away the samples to be tested in an independent laboratory.	http://www.standard.co.uk/news/transport/revealed-londons-dirtiest-tube-lines-and-underground-stations-a3307946.html	\N	0
 21132	Tube Exits for the London Underground - Save Time. Beat the crowds.	Save valuable time on the London Underground: no more delays following crowds and walking the length of the platform. With accurate and unique information.	http://www.tubeexits.co.uk/	\N	0
 21133	Lives on the Line	Lives on the Line. Life Expectancy at Birth & Child Poverty as a Tube Map. Child Poverty. Most deprived. Least deprived. Read more... Switch to. Life Expectancy.	http://www.life.mappinglondon.co.uk/	\N	0
@@ -10293,3 +10293,4 @@ ALTER TABLE ONLY webpages
 --
 -- PostgreSQL database dump complete
 --
+
