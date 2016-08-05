@@ -35,6 +35,14 @@ module Helpers
     (page_number - 1) * 10
   end
 
+  def page_active(page, start)
+    p page
+    p start
+    current_page = (start.to_i / 10) + 1
+    p current_page
+    current_page == page ? "_active" : ""
+  end
+
   def pluralise(word, count)
     count != 1 ? word + 's' : word
   end

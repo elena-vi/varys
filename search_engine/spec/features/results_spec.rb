@@ -33,12 +33,6 @@ feature 'Results page' do
       expect(page).not_to have_content(result_2.url)
     end
 
-    xscenario 'returns result when given partial url' do
-      visit '/results?q=portsmouth.co.uk'
-
-      expect(page).to have_content(result.url)
-    end
-
     scenario 'can handle multiple word queries' do
       visit '/results?q=portsmouth+news'
 
@@ -95,11 +89,11 @@ feature 'Results page' do
       id = 0
 
       10.times do |i|
-        id = results.first.id + i
+        id = results.last.id - i
         expect(page).to have_css("article#result_#{id}")
       end
 
-      expect(page).not_to have_css("article#result_#{id + 1}")
+      expect(page).not_to have_css("article#result_#{id - 1}")
     end
 
     scenario 'it displays more results on page two' do
@@ -108,11 +102,11 @@ feature 'Results page' do
       id = 0
 
       5.times do |i|
-        id = results.first.id + i + 10
+        id = results.last.id - i - 10
         expect(page).to have_css("article#result_#{id}")
       end
 
-      expect(page).not_to have_css("article#result_#{id + 1}")
+      expect(page).not_to have_css("article#result_#{id - 1}")
     end
 
     scenario 'it links to the next 10 results' do
@@ -123,8 +117,8 @@ feature 'Results page' do
       end
 
       expect(current_path).to eq '/results'
-      expect(page).to have_css("article#result_#{results.last.id}")
-      expect(page).not_to have_css("article#result_#{results.first.id}")
+      expect(page).to have_css("article#result_#{results.first.id}")
+      expect(page).not_to have_css("article#result_#{results.last.id}")
     end
   end
 end

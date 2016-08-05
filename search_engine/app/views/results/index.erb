@@ -16,7 +16,7 @@
 
     <div id="pages">
       <% get_pages(@count, @start).each do |i| %>
-        <div class="page"><a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><%= i %></a></div>
+        <div class="page<%= page_active(i, @start) %>"><a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><%= i %></a></div>
       <% end %>
     </div>
   </div>

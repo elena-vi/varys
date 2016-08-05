@@ -46,14 +46,16 @@ class Webpage
       url_length = get_extra_nodes(result.url).length
       result.rank -= (result.rank * 0.25) * url_length
       result.rank *= 1.5 if url_length == 0
+      p result.clicks
       result.rank += (result.clicks * 0.02)
+      p result.rank
     end
 
     result_objects.sort_by! do |result|
       result.rank
     end
 
-    result_objects.reverse[query_from, query_from+10]
+    result_objects.reverse[query_from..query_from+9]
   end
 
   def self.get_extra_nodes(url)
@@ -86,6 +88,7 @@ class Webpage
 
   def self.convert_results_to_objects(query_results)
     results = []
+
     query_results.map do |result|
       results << Webpage.new( id: result['id'].to_i,
       title: result['title'],

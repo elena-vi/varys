@@ -115,7 +115,7 @@ a:hover {
   text-decoration: underline;
 }
 
-span span {
+article span span {
   font-weight: bold !important;
 }
 
@@ -144,9 +144,24 @@ input:-webkit-autofill {
   text-align: center;
 }
 
-#landing h1 {
-  font-size: 4em;
+#weather_location h3 {
   font-weight: lighter;
+  font-size: 2em;
+}
+
+#weather_temperature h4 {
+  font-weight: lighter;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-weight: lighter !important;
+}
+
+#landing h1 {
+  font-size: 4em !important;
+  font-weight: lighter !important;
 }
 
 #stats {
@@ -176,7 +191,14 @@ input:-webkit-autofill {
 
 #widget h2 {
   margin: 0px;
-  font-weight: 500;
+  font-weight: 400;
+  text-align: center;
+}
+
+.dog {
+  max-width: 310px;
+  display: block;
+  margin-bottom: 20px;
 }
 
 #widget_header {
@@ -194,14 +216,11 @@ input:-webkit-autofill {
   font-size: 0.8em;
 }
 
-.page {
-  display: inline-block;
-}
-
 .page a, .page_active a {
   padding: 7px;
   border: 1px solid #007FFF;
   margin: 0 7px 7px 0;
+  float: left;
 }
 
 .page_active a {

@@ -6,7 +6,7 @@ class Database
 	def self.search(query_string)
 		begin
 			connection = PG.connect :dbname => 'varys_' + ENV['RACK_ENV']
-			results = connection.exec "SELECT DISTINCT id, title, description, url, ts_rank_cd(textsearch, query) AS rank
+			results = connection.exec "SELECT DISTINCT id, title, description, url, clicks, ts_rank_cd(textsearch, query) AS rank
 			FROM webpages, plainto_tsquery('english', '#{query_string}') query, to_tsvector(url || title || description) textsearch
 			WHERE query @@ textsearch
 			ORDER BY rank DESC"
@@ -65,15 +65,3 @@ class Database
 
 
 end
-
-
-
-
-
-
-
-
-
-
-
-

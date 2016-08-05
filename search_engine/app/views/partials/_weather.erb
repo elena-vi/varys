@@ -3,10 +3,10 @@
     <h2>Weather Service</h2>
   </div>
   <div id='widget_body'>
-    <div id="weather_location"><%= weather[:location] %></div>
+    <div id="weather_location"><h3><%= weather[:location] %></h3></div>
     <div id="weather_image"><img src="http://openweathermap.org/img/w/<%= weather[:icon] %>.png" /></div>
+    <div id="weather_temperature"><h4><%= k_to_c(weather[:temperature]) %></h4></div>
     <div id="weather_current_weather"><%= weather[:main] %></div>
-    <div id="weather_detailed_weather"><%= weather[:description] %></div>
-    <div id="weather_temperature"><%= k_to_c(weather[:temperature]) %></div>
+    <div id="weather_detailed_weather"><%= weather[:description].capitalize %></div>
   </div>
 </div>
