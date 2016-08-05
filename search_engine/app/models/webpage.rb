@@ -46,9 +46,7 @@ class Webpage
       url_length = get_extra_nodes(result.url).length
       result.rank -= (result.rank * 0.25) * url_length
       result.rank *= 1.5 if url_length == 0
-      p result.clicks
       result.rank += (result.clicks * 0.02)
-      p result.rank
     end
 
     result_objects.sort_by! do |result|

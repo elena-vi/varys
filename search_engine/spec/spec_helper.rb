@@ -7,10 +7,13 @@ require 'capybara/rspec'
 require 'rspec'
 require 'factory_girl'
 require 'database_cleaner'
+require 'simplecov'
 
 require File.join(File.dirname(__FILE__), '..', 'app/app.rb')
 
 Capybara.app = Varys
+
+SimpleCov.start
 
 RSpec.configure do |config|
   config.include Capybara::DSL

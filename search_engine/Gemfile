@@ -8,6 +8,7 @@ gem 'dm-ar-finders'
 gem 'sinatra-partial'
 gem 'rest-client'
 gem 'pg'
+gem 'simplecov'
 
 group :test do
   gem 'rspec'

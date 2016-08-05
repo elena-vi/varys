@@ -36,10 +36,7 @@ module Helpers
   end
 
   def page_active(page, start)
-    p page
-    p start
     current_page = (start.to_i / 10) + 1
-    p current_page
     current_page == page ? "_active" : ""
   end
 
