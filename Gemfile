@@ -1,10 +1,7 @@
 source 'https://rubygems.org'
-ruby '2.2.3'
+ruby '2.3.0'
 
 gem 'sinatra'
-gem 'data_mapper'
-gem 'dm-postgres-adapter'
-gem 'dm-ar-finders'
 gem 'sinatra-partial'
 gem 'rest-client'
 gem 'pg'
@@ -14,6 +11,4 @@ group :test do
   gem 'rspec'
   gem 'capybara'
   gem 'factory_girl'
-  gem 'database_cleaner'
-  gem 'nyan-cat-formatter'
 end
