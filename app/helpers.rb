@@ -23,12 +23,13 @@ module Helpers
 
     current_page = (current_start / 10)
 
-    if current_page < 4
-      return pages_array[0, 10]
-    else
-      # page is 8 so show 9 to 17
-      return pages_array[current_page-1, current_page+6]
-    end
+    pages_array
+
+    # if current_page < 10
+    #   return pages_array[0, 10]
+    # else
+    #   return pages_array[current_page-1, current_page+6]
+    # end
   end
 
   def get_start_number(page_number)

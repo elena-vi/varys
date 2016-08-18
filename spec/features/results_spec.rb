@@ -14,7 +14,6 @@ feature 'Results page' do
 
       expect(page).to have_content(result.title)
       expect(page).to have_content(result.description)
-      expect(page).to have_content(result.url)
     end
 
     scenario 'only displays the relevant news result' do

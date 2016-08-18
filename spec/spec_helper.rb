@@ -5,6 +5,7 @@ require 'capybara/rspec'
 require 'rspec'
 require 'factory_girl'
 require 'simplecov'
+require 'database_cleaner'
 
 require File.join(File.dirname(__FILE__), '..', 'app/app.rb')
 
@@ -23,15 +24,17 @@ RSpec.configure do |config|
     FactoryGirl.reload
   end
 
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
   config.after(:each) do
-    begin
-      connection = PG.connect(dbname: "varys_#{ENV['RACK_ENV']}")
-      connection.exec("TRUNCATE webpages;")
-    rescue PG::Error => e
-      puts e.message
-    ensure
-      connection.close if connection
-    end
+    DatabaseCleaner.clean
   end
 
   config.expect_with(:rspec) do |expectations|

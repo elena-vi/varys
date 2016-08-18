@@ -144,6 +144,16 @@ input:-webkit-autofill {
   text-align: center;
 }
 
+#landing h1 {
+  font-size: 4em !important;
+  font-weight: lighter !important;
+}
+
+#landing h2 {
+  font-size: 1em;
+  font-weight: lighter;
+}
+
 #weather_location h3 {
   font-weight: lighter;
   font-size: 2em;
@@ -156,11 +166,6 @@ input:-webkit-autofill {
 }
 
 h1 {
-  font-weight: lighter !important;
-}
-
-#landing h1 {
-  font-size: 4em !important;
   font-weight: lighter !important;
 }
 
@@ -193,12 +198,6 @@ h1 {
   margin: 0px;
   font-weight: 400;
   text-align: center;
-}
-
-.dog {
-  max-width: 310px;
-  display: block;
-  margin-bottom: 20px;
 }
 
 #widget_header {

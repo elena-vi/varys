@@ -3,8 +3,8 @@ class Varys < Sinatra::Base
     @now = Time.now
     @query = params[:q]
     @start = params[:start].to_i || 0
-    @count = Webpage.get_all_results(@query).length
-    @results = Webpage.do_search(@query, @start)
+    @count = Webpage.do_search(@query, @start)[:count]
+    @results = Webpage.do_search(@query, @start)[:results]
     erb :'results/index'
   end
 end
