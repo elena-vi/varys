@@ -18,8 +18,6 @@ class Webpage
   def self.do_search(query_string, query_from)
     return [] if query_string == ""
 
-    p query_from
-
     sql = "SELECT id, title, description, url, clicks,
                   ts_rank_cd(textsearch, query) AS rank
            FROM webpages,
@@ -28,11 +26,7 @@ class Webpage
            WHERE query @@ textsearch
            ORDER BY rank DESC"
 
-    p sql
-
     results = map_to_objects(self.find_by_sql(sql))
-
-    p results
 
     results.each do |result|
       url_length = get_extra_nodes(result.url).length
@@ -45,19 +39,7 @@ class Webpage
       result.rank
     end
 
-    {results: results.reverse[query_from..query_from+9], count: results.length }
-  end
-
-  def self.get_result_count(query_string)
-    sql = "SELECT id, title, description, url, clicks,
-                  ts_rank_cd(textsearch, query) AS rank
-           FROM webpages,
-           plainto_tsquery('english', '#{query_string}') query,
-           to_tsvector(url || title || description) textsearch
-           WHERE query @@ textsearch
-           ORDER BY rank DESC"
-
-    map_to_objects(self.find_by_sql(sql)).length
+    [results.reverse[query_from..query_from+9], results.length]
   end
 
   def self.get_extra_nodes(url)

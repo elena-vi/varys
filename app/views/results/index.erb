@@ -1,6 +1,7 @@
 <header>
   <h1><a href="/">varys</a></h1><%=erb :'partials/_search_box' %>
 </header>
+<div id='container'>
 
 <% if @count > 0 %>
   <div id='results'>
@@ -24,6 +25,7 @@
 
 <div id='widgets'>
 
+</div>
 </div>
 <script>
   $.get('/widgets?q=<%= @query %>', function(data) {

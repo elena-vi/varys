@@ -4,11 +4,10 @@
   position: relative;
   padding: 0;
   margin: 0;
-  width: 348px;
+  width: 100%;
 }
-
 #tube li {
-  padding: 10px;
+  padding: 10px 20px;
 }
 .status{
   float: right;
@@ -18,40 +17,39 @@
   position: absolute;
   background: inherit;
   padding: 10px;
-  width: 328px;
+  width: 100%;
   margin: -28px 0 0 -10px;
   text-align: left;
 }
 #tube li:hover .reason{
   display: block;
 }
-
 #bakerloo {
-  background: #B36305
+  background: #B36305;
 }
 #central {
-  background: #E32017
+  background: #E32017;
 }
 #circle {
-  background: #FFD300
+  background: #FFD300;
 }
 #district {
-  background: #00782A
+  background: #00782A;
 }
 #dlr {
-  background: #00A4A7
+  background: #00A4A7;
 }
 #hammersmith-city {
-  background: #F3A9BB
+  background: #F3A9BB;
 }
 #jubilee {
-  background: #A0A5A9
+  background: #A0A5A9;
 }
 #london-overground {
-  background: #EE7C0E
+  background: #EE7C0E;
 }
 #metropolitan {
-  background: #9B0056
+  background: #9B0056;
 }
 #northern {
   background: #000000;
@@ -60,11 +58,11 @@
   background: #003688;
 }
 #tfl-rail {
-  background: #0019a8
+  background: #0019a8;
 }
 #victoria {
-  background: #0098D4
+  background: #0098D4;
 }
 #waterloo-city {
-  background: #95CDBA
+  background: #95CDBA;
 }

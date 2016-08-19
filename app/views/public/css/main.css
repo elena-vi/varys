@@ -87,18 +87,18 @@ article h2 {
 
 article h2 a {
   display: block;
-  width: 500px;
+  max-width: 500px;
 }
 
 article h3 {
   font-size: 1em;
   color: #DC0073;
-  width: 550px;
+  max-width: 550px;
 }
 
 article h4 {
   font-size: 1em;
-  width: 550px;
+  max-width: 550px;
 }
 
 article h5 {
@@ -230,4 +230,66 @@ h1 {
 
 .description {
   display: block;
+}
+
+@media only screen and (max-width: 700px) {
+  header {
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px 20px 10px 10px;
+    display: flex;
+  }
+  header input[type=text] {
+    width: calc(100% - 60px);
+  }
+  header h1, form {
+    float: left;
+  }
+  header form {
+    width: 100%;
+  }
+  header h1 {
+    padding: 0;
+    margin-right: 10px;
+  }
+  #container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  #widgets {
+    margin: 0;
+    order: 1;
+    float: none;
+    width: 100%;
+  }
+  #widget {
+    width: 100%;
+    margin: -21px;
+    box-shadow: none;
+    border-left: 0px;
+    border-right: 0px;
+  }
+  #widget h2, #widget_body {
+    text-align: left;
+    font-weight: lighter;
+  }
+  #widget h2 {
+    font-size: 1em;
+  }
+  #results {
+    margin-left: 0;
+    order: 2;
+    float: none;
+  }
+  article {
+    width: calc(100% - 40px);
+  }
+  article h2, h2 a, h3, h4, h5 {
+    white-space: normal;
+    width: 100%;
+    text-align: justify;
+  }
 }
