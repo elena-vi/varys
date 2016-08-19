@@ -296,4 +296,14 @@ h1 {
     width: 100%;
     text-align: justify;
   }
+  #pages {
+    padding: 20px;
+    font-size: 1em;
+  }
+  .page a, .page_active a {
+    padding: 10px;
+    border: 1px solid #007FFF;
+    margin: 0 10px 10px 0;
+    float: left;
+  }
 }
