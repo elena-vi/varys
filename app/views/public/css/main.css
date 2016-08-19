@@ -252,6 +252,9 @@ h1 {
     padding: 0;
     margin-right: 10px;
   }
+  header h1 a {
+    font-weight: 100;
+  }
   #container {
     display: flex;
     flex-direction: column;
@@ -261,13 +264,14 @@ h1 {
   }
   #widgets {
     margin: 0;
+    padding: 0;
     order: 1;
     float: none;
     width: 100%;
   }
   #widget {
     width: 100%;
-    margin: -21px;
+    margin-top: -1px;
     box-shadow: none;
     border-left: 0px;
     border-right: 0px;
