@@ -1,0 +1,34 @@
+<header>
+  <h1><a href="/">varys</a></h1><%=erb :'partials/_search_box' %>
+</header>
+<div id='container'>
+
+<% if @count > 0 %>
+  <div id='results'>
+    <div id='stats'>
+      <%= @count %>
+      <%= pluralise('result', @count) %>
+      in <%= Time.now - @now %> seconds
+    </div>
+
+    <% @results.each do |result| %>
+      <%= erb :'partials/_result', locals: { result: result } %>
+    <% end %>
+
+    <div id="pages">
+      <% get_pages(@count, @start).each do |i| %>
+        <div class="page<%= page_active(i, @start) %>"><a href="/results?q=<%= @query %>&start=<%= get_start_number(i) %>"><%= i %></a></div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<div id='widgets'>
+
+</div>
+</div>
+<script>
+  $.get('/widgets?q=<%= @query %>', function(data) {
+    $('#widgets').html(data)
+  })
+</script>

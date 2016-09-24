@@ -1,0 +1,309 @@
+body {
+  margin: 0;
+  font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+header {
+  background-color: #EEF1EF;
+  border-bottom: 1px solid #d2dad5;
+  padding: 10px 10px 10px 20px;
+  vertical-align: middle;
+  overflow: auto;
+}
+
+header h1 {
+  font-size: 2em;
+  font-weight: lighter;
+  width: 100px;
+}
+
+header a {
+  color: #474647 !important;
+}
+
+header a:hover {
+  text-decoration: none;
+}
+
+header h1, form {
+  float: left;
+  margin: 0;
+}
+
+header input[type=text] {
+  width: 500px;
+  margin: 0;
+  height: 18px;
+  border: 1px solid #d2dad5;
+}
+
+header input[type=text]:hover {
+  border-color: #bfcbc4;
+}
+
+header input[type=text]:focus {
+  border-color: #007FFF;
+}
+
+header input[type=submit] {
+  text-align: center;
+  border-radius: 2px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  height: 40px;
+  margin: 0 0 0 -2px;
+  width: 40px;
+  background-color: #DC0073;
+  background-image: url('../images/search.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 18px 18px;
+  border: none;
+  color: #FFF;
+}
+
+header input[type=submit]:hover {
+  background-color: #cb006a;
+}
+
+article {
+  padding: 20px 0 0 20px;
+  margin: 0;
+  max-width: 600px;
+}
+
+article h2, h2 a, h3, h4, h5 {
+  margin: 0;
+  font-weight: normal;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+article h2 {
+  font-size: 1.2em;
+}
+
+article h2 a {
+  display: block;
+  max-width: 500px;
+}
+
+article h3 {
+  font-size: 1em;
+  color: #DC0073;
+  max-width: 550px;
+}
+
+article h4 {
+  font-size: 1em;
+  max-width: 550px;
+}
+
+article h5 {
+  font-size: 0.8em;
+  color: #d2dad5;
+}
+
+a, a:visited, a:active {
+  color: #007FFF;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+article span span {
+  font-weight: bold !important;
+}
+
+input {
+  outline: none;
+  font-size: 1em;
+  padding: 10px;
+}
+
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  border: 0;
+}
+
+.home {
+  border-top: 1px solid #d2dad5;
+  text-align: center !important;
+}
+
+.home form {
+  float: none !important;
+}
+
+#landing {
+  margin: 10% auto;
+  text-align: center;
+}
+
+#landing h1 {
+  font-size: 4em !important;
+  font-weight: lighter !important;
+}
+
+#landing h2 {
+  font-size: 1em;
+  font-weight: lighter;
+}
+
+#weather_location h3 {
+  font-weight: lighter;
+  font-size: 2em;
+}
+
+#weather_temperature h4 {
+  font-weight: lighter;
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+h1 {
+  font-weight: lighter !important;
+}
+
+#stats {
+  padding: 20px 0 0 20px;
+  color: #91a498;
+  font-size: 0.8em;
+}
+
+#results {
+  float: left;
+  max-width: 600px;
+  margin-left: 100px;
+}
+
+#widgets {
+  float: left;
+  width: 350px;
+  padding: 20px;
+  margin: 20px 0 20px 100px;
+}
+
+#widget {
+  border: 1px solid #dbe2de;
+  box-shadow: 0px 0px 5px #c9d2cc;
+  margin-top: 20px;
+}
+
+#widget h2 {
+  margin: 0px;
+  font-weight: 400;
+  text-align: center;
+}
+
+#widget_header {
+  border-bottom: 1px solid #dbe2de;
+  padding: 20px;
+}
+
+#widget_body {
+  padding: 20px;
+  text-align: center;
+}
+
+#pages {
+  padding: 20px;
+  font-size: 0.8em;
+}
+
+.page a, .page_active a {
+  padding: 7px;
+  border: 1px solid #007FFF;
+  margin: 0 7px 7px 0;
+  float: left;
+}
+
+.page_active a {
+  background-color: #007FFF;
+  color: #FFF;
+  font-weight: bold;
+}
+
+.description {
+  display: block;
+}
+
+@media only screen and (min-device-width: 375px) and (max-width: 667px) and (-webkit-min-device-pixel-ratio: 2) {
+  header {
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px 20px 10px 10px;
+    display: flex;
+  }
+  header input[type=text] {
+    width: calc(100% - 60px);
+  }
+  header h1, form {
+    float: left;
+  }
+  header form {
+    width: 100%;
+  }
+  header h1 {
+    padding: 0;
+    margin-right: 10px;
+  }
+  header h1 a {
+    font-weight: 100;
+  }
+  #container {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+  #widgets {
+    margin: 0;
+    padding: 0;
+    order: 1;
+    float: none;
+    width: 100%;
+  }
+  #widget {
+    width: 100%;
+    margin-top: -1px;
+    box-shadow: none;
+    border-left: 0px;
+    border-right: 0px;
+  }
+  #widget h2, #widget_body {
+    text-align: left;
+    font-weight: lighter;
+  }
+  #widget h2 {
+    font-size: 1em;
+  }
+  #results {
+    margin-left: 0;
+    order: 2;
+    float: none;
+  }
+  article {
+    width: calc(100% - 40px);
+  }
+  article h2, h2 a, h3, h4, h5 {
+    white-space: normal;
+    width: 100%;
+    text-align: justify;
+  }
+  #pages {
+    padding: 20px;
+    font-size: 1em;
+  }
+  .page a, .page_active a {
+    padding: 10px;
+    border: 1px solid #007FFF;
+    margin: 0 10px 10px 0;
+    float: left;
+  }
+}
