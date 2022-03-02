@@ -10,6 +10,6 @@ setup(
     author_email='',
     description='A search engine',
     install_requires=[
-        'Scrapy==1.1.1'
+        'Scrapy==1.8.2'
     ],
 )
