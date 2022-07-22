@@ -129,9 +129,9 @@ GEM
     sinatra-partial (1.0.0)
       sinatra (~> 1.4)
     stringex (1.5.1)
-    thread_safe (0.3.5)
+    thread_safe (0.3.6)
     tilt (2.0.5)
-    tzinfo (1.2.2)
+    tzinfo (1.2.10)
       thread_safe (~> 0.1)
     unf (0.1.4)
       unf_ext
